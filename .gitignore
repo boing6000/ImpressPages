@@ -2,7 +2,6 @@
 /.buildpath
 /.settings
 /.idea
-/composer.lock
 /project
 /file
 /robots.txt
