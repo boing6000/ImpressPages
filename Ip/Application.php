@@ -44,30 +44,7 @@ class Application
      */
     public function init()
     {
-        global $ipFile_baseDir, $ipFile_overrides;
-        $ipFile_baseDir = null; //required for MultiSite when several application instances are initialized one after another
-        $ipFile_overrides = null; //required for MultiSite when several application instances are initialized one after another
-
-        if ($this->config) {
-            $config = $this->config;
-        } else {
-            $config = require($this->configPath);
-        }
-
-
-        require_once __DIR__ . '/Config.php';
-
-        $config = new \Ip\Config($config);
-        require_once __DIR__ . '/ServiceLocator.php';
-        \Ip\ServiceLocator::setConfig($config);
-
-        require_once __DIR__ . '/Internal/Autoloader.php';
-        require_once __DIR__ . '/Lib/vendor/autoload.php';
-
-        $autoloader = new \Ip\Autoloader();
-        spl_autoload_register(array($autoloader, 'load'));
-
-        require_once __DIR__ . '/Functions.php';
+        //this function has been left here just to avoid any issues with old index.php fies running it.
     }
 
     /**
@@ -436,6 +413,32 @@ class Application
      */
     public function run($options = array())
     {
+        global $ipFile_baseDir, $ipFile_overrides;
+        $ipFile_baseDir = null; //required for MultiSite when several application instances are initialized one after another
+        $ipFile_overrides = null; //required for MultiSite when several application instances are initialized one after another
+
+        if ($this->config) {
+            $config = $this->config;
+        } else {
+            $config = require($this->configPath);
+        }
+
+
+        require_once __DIR__ . '/Config.php';
+
+        $config = new \Ip\Config($config);
+        require_once __DIR__ . '/ServiceLocator.php';
+        \Ip\ServiceLocator::setConfig($config);
+
+        require_once __DIR__ . '/Internal/Autoloader.php';
+        require_once __DIR__ . '/Lib/vendor/autoload.php';
+
+        $autoloader = new \Ip\Autoloader();
+        spl_autoload_register(array($autoloader, 'load'));
+
+        require_once __DIR__ . '/Functions.php';
+
+
         $this->prepareEnvironment($options);
         $request = new \Ip\Request();
 
