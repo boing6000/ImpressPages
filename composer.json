@@ -8,5 +8,6 @@
   },
   "config": {
     "vendor-dir": "Ip/Lib/vendor"
-  }
+  },
+  "minimum-stability": "stable"
 }
