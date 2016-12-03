@@ -20,12 +20,15 @@ class Application
      * @ignore
      * @param $configPath
      */
-    public function __construct($configPath)
+    public function __construct($configPath = null)
     {
         if (is_array($configPath)) {
             $this->config = $configPath;
         } else {
             $this->configPath = $configPath;
+        }
+        if ($this->configPath == null) {
+            $this->configPath = __DIR__ . '/../../../../config.php';
         }
     }
 
@@ -431,7 +434,6 @@ class Application
         \Ip\ServiceLocator::setConfig($config);
 
         require_once __DIR__ . '/Internal/Autoloader.php';
-        require_once __DIR__ . '/Lib/vendor/autoload.php';
 
         $autoloader = new \Ip\Autoloader();
         spl_autoload_register(array($autoloader, 'load'));
