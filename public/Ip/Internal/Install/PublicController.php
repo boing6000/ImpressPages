@@ -144,11 +144,6 @@ class PublicController extends \Ip\Controller
             'helpUrl' => 'http://www.impresspages.org/help/index-html',
             'type' => Helper::checkFileIndexDotHtml()
         );
-        $requirements[] = array(
-            'name' => __('Magic quotes off (optional)', 'Install'),
-            'helpUrl' => 'http://www.impresspages.org/help/magic-quotes',
-            'type' => Helper::checkMagicQuotes()
-        );
         if (Helper::isApache()) {
             $requirements[] = array(
                 'name' => __('Apache module "mod_rewrite"', 'Install'),

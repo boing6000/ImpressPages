@@ -243,14 +243,6 @@ class Helper
         return 'success';
     }
 
-    public static function checkMagicQuotes()
-    {
-        if (get_magic_quotes_gpc()) {
-            return 'warning';
-        }
-        return 'success';
-    }
-
     public static function checkModRewrite()
     {
         if (empty($_SESSION['rewritesEnabled'])) { // this test is done through ajax in first step
