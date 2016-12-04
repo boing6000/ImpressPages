@@ -1,6 +1,6 @@
 
 ToDo
-- remove values from config.php
++ remove values from config.php
 - replace internal autoloader with psr
 - remove "if (!function_exists('ipFile')) {" from functions.php
 - remove $ipFile_overrides
