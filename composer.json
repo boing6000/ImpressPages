@@ -31,5 +31,8 @@
       }
     }
   ],
+  "autoload": {
+    "psr-4": {"Ip\\Internal\\": "public/Ip/Internal/"}
+  },
   "minimum-stability": "stable"
 }

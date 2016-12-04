@@ -11,5 +11,6 @@ if ((PHP_MAJOR_VERSION < 5) || (PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION < 5)
 }
 
 require_once __DIR__.'/../vendor/autoload.php';
-$configFilename = dirname(__DIR__) . '/config.php';
-require_once '../vendor/impresspages/impresspages/Ip/script/run.php';
+
+$application = new \Ip\Application();
+$application->run();
