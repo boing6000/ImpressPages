@@ -433,8 +433,6 @@ class Application
         require_once __DIR__ . '/ServiceLocator.php';
         \Ip\ServiceLocator::setConfig($config);
 
-        require_once __DIR__ . '/Internal/Autoloader.php';
-
         $autoloader = new \Ip\Autoloader();
         spl_autoload_register(array($autoloader, 'load'));
 
