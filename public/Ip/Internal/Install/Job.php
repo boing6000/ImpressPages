@@ -19,11 +19,20 @@ class Job
         if (!ipConfig()->isEmpty()) {
             return null;
         }
-        return array(
+
+        $route = [
             'plugin' => 'Install',
             'controller' => 'PublicController',
-            'action' => 'index',
-        );
+            'action' => 'index'
+        ];
+
+        if (!empty(ipRequest()->getRequest('pa'))) {
+            $actionParts = explode('.', ipRequest()->getRequest('pa'));
+            if (!empty($actionParts[1])) {
+                $route['action'] = $actionParts[1];
+            }
+        }
+        return $route;
     }
 
     public static function ipRouteLanguage_0($info)
