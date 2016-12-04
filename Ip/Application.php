@@ -71,7 +71,7 @@ class Application
 
         if (empty($options['skipSession'])) {
             if (session_id() == '' && !headers_sent()) { //if session hasn't been started yet
-                session_name(ipConfig()->get('sessionName'));
+                session_name(ipConfig()->get('sessionName', 'impresspages'));
                 if (!ipConfig()->get('disableHttpOnlySetting')) {
                     ini_set('session.cookie_httponly', 1);
                 }
@@ -91,7 +91,7 @@ class Application
             mb_internal_encoding(ipConfig()->get('charset'));
         }
 
-        if (empty($options['skipTimezone'])) {
+        if (empty($options['skipTimezone']) && ipConfig()->get('timezone')) {
             date_default_timezone_set(ipConfig()->get('timezone')); //PHP 5 requires timezone to be set.
         }
     }
@@ -153,29 +153,11 @@ class Application
             ipRequest()->_setRoutePath($request->getRelativePath());
         }
 
-        //find out and set locale
-        $locale = $requestLanguage->getCode();
-        if (strlen($locale) == '2') {
-            $locale = strtolower($locale) . '_' . strtoupper($locale);
-        } else {
-            $locale = str_replace('-', '_', $locale);
+        if ($requestLanguage) {
+            $this->setLocale($requestLanguage);
+            ipContent()->_setCurrentLanguage($requestLanguage);
+            $_SESSION['ipLastLanguageId'] = $requestLanguage->getId();
         }
-        $locale .= '.utf8';
-        if($locale ==  "tr_TR.utf8" && (PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION < 5)) { //Overcoming this bug https://bugs.php.net/bug.php?id=18556
-            setlocale(LC_COLLATE, $locale);
-            setlocale(LC_MONETARY, $locale);
-            setlocale(LC_NUMERIC, $locale);
-            setlocale(LC_TIME, $locale);
-            setlocale(LC_MESSAGES, $locale);
-            setlocale(LC_CTYPE, "en_US.utf8");
-        } else {
-            setLocale(LC_ALL, $locale);
-        }
-        setlocale(LC_NUMERIC, "C"); //user standard C syntax for numbers. Otherwise you will get funny things with when autogenerating CSS, etc.
-
-        ipContent()->_setCurrentLanguage($requestLanguage);
-
-        $_SESSION['ipLastLanguageId'] = $requestLanguage->getId();
 
         if (empty($options['skipTranslationsInit'])) {
             if (!empty($options['translationsLanguageCode'])) {
@@ -306,7 +288,9 @@ class Application
             }
         }
 
-        ipEvent('ipBeforeController', $eventInfo);
+        if (ipConfig()->database()) {
+            ipEvent('ipBeforeController', $eventInfo);
+        }
 
         $controllerAnswer = ipJob('ipExecuteController', $eventInfo);
 
@@ -370,6 +354,9 @@ class Application
      */
     public function modulesInit()
     {
+        if (!ipConfig()->database()) {
+            return;
+        }
         $translator = \Ip\ServiceLocator::translator();
         $overrideDir = ipFile("file/translations/override/");
 
@@ -426,11 +413,10 @@ class Application
             $config = require($this->configPath);
         }
 
-
-        require_once __DIR__ . '/Config.php';
-
+        if (!is_array($config)) {
+            $config = [];
+        }
         $config = new \Ip\Config($config);
-        require_once __DIR__ . '/ServiceLocator.php';
         \Ip\ServiceLocator::setConfig($config);
 
         $autoloader = new \Ip\Autoloader();
@@ -474,8 +460,9 @@ class Application
     public function close()
     {
         ipEvent('ipBeforeApplicationClosed');
-
-        ipDb()->disconnect();
+        if (ipConfig()->database()) {
+            ipDb()->disconnect();
+        }
     }
 
     /**
@@ -489,5 +476,31 @@ class Application
             $_SESSION['ipSecurityToken'] = md5(uniqid(rand(), true));
         }
         return $_SESSION['ipSecurityToken'];
+    }
+
+    /**
+     * @param $requestLanguage
+     */
+    protected function setLocale($requestLanguage)
+    {
+//find out and set locale
+        $locale = $requestLanguage->getCode();
+        if (strlen($locale) == '2') {
+            $locale = strtolower($locale) . '_' . strtoupper($locale);
+        } else {
+            $locale = str_replace('-', '_', $locale);
+        }
+        $locale .= '.utf8';
+        if ($locale == "tr_TR.utf8" && (PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION < 5)) { //Overcoming this bug https://bugs.php.net/bug.php?id=18556
+            setlocale(LC_COLLATE, $locale);
+            setlocale(LC_MONETARY, $locale);
+            setlocale(LC_NUMERIC, $locale);
+            setlocale(LC_TIME, $locale);
+            setlocale(LC_MESSAGES, $locale);
+            setlocale(LC_CTYPE, "en_US.utf8");
+        } else {
+            setLocale(LC_ALL, $locale);
+        }
+        setlocale(LC_NUMERIC, "C"); //user standard C syntax for numbers. Otherwise you will get funny things with when autogenerating CSS, etc.
     }
 }
