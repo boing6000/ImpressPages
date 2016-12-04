@@ -24,7 +24,7 @@ $(document).ready(function() {
     $('.ipsUrlRewritesCheck').addClass('disabled');
 
     $.ajax({
-        url: 'Plugin/Install/test/check-rewrites.php',
+        url: 'Ip/Internal/Install/test/check-rewrites.php',
         dataType: 'json',
         type: 'POST',
         success: function (response) {
