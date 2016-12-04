@@ -44,7 +44,7 @@ class Model
 
     public static function createDatabaseStructure($database, $tablePrefix)
     {
-        $sql = file_get_contents(self::ipFile('Plugin/Install/sql/structure.sql'));
+        $sql = file_get_contents(self::ipFile('Ip/Internal/Install/sql/structure.sql'));
 
         $sql = str_replace("[[[[database]]]]", $database, $sql);
         $sql = str_replace("DROP TABLE IF EXISTS `ip_", "DROP TABLE IF EXISTS `". $tablePrefix, $sql);
@@ -60,7 +60,7 @@ class Model
     {
         $errors = array();
 
-        $sqlFile = self::ipFile('Plugin/Install/sql/data.sql');
+        $sqlFile = self::ipFile('Ip/Internal/Install/sql/data.sql');
         $fh = fopen($sqlFile, 'r');
         $sql = fread($fh, utf8_decode(filesize($sqlFile)));
         fclose($fh);

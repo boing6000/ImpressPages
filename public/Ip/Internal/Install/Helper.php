@@ -289,7 +289,7 @@ class Helper
 
     public static function checkFolderPlugin()
     {
-        if (!Helper::isDirectoryWritable(Model::ipFile('Plugin/'))) {
+        if (!Helper::isDirectoryWritable(ipFile('Plugin/'))) {
             return 'warning';
         }
         return 'success';
@@ -297,9 +297,7 @@ class Helper
 
     public static function checkFolderTheme()
     {
-        // We cannot use Model::ipFile('Theme/') cause it is overriden
-        // and points to install/Theme
-        if (!Helper::isDirectoryWritable(Model::ipFile('') . 'Theme')) {
+        if (!Helper::isDirectoryWritable(ipFile('Theme/'))) {
             return 'error';
         }
         return 'success';
@@ -366,7 +364,7 @@ class Helper
             'languages' => array(),
             'pages' => array(),
             'locale' => isset($_SESSION['installationLanguage']) ? $_SESSION['installationLanguage'] : \Ip\Internal\Install\Helper::$defaultLanguageCode,
-            'doSupport' => $_SESSION['config']['support'],
+            'doSupport' => !empty($_SESSION['config']['support']),
             'administrators' => array(array(
                 'id' => 'install',
                 'email' => $_SESSION['config']['websiteEmail'],
