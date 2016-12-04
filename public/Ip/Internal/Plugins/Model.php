@@ -26,7 +26,8 @@ class Model
             "Translations",
             "System",
             "Update",
-            "Ecommerce"
+            "Ecommerce",
+            "Install"
         );
 
 

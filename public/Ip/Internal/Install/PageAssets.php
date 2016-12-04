@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Plugin\Install;
+namespace Ip\Internal\Install;
 
 
 class PageAssets extends \Ip\Internal\PageAssets

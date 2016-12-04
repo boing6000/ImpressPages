@@ -1,5 +1,5 @@
 <?php
-namespace Plugin\Install;
+namespace Ip\Internal\Install;
 
 class Request extends \Ip\Request {
 

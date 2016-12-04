@@ -15,8 +15,8 @@
                 <div class="page-header">
                     <img src="<?php echo ipThemeUrl('assets/impresspages_logo.png'); ?>" alt="ImpressPages">
                     <?php
-                        $languages = \Plugin\Install\Helper::getInstallationLanguages();
-                        $currentLanguage = isset($_SESSION['installationLanguage']) ? $_SESSION['installationLanguage'] : \Plugin\Install\Helper::$defaultLanguageCode;
+                        $languages = \Ip\Internal\Install\Helper::getInstallationLanguages();
+                        $currentLanguage = isset($_SESSION['installationLanguage']) ? $_SESSION['installationLanguage'] : \Ip\Internal\Install\Helper::$defaultLanguageCode;
                     ?>
                     <div class="pull-right dropdown">
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -26,7 +26,7 @@
                         <ul class="dropdown-menu">
                             <?php foreach ($languages as $key => $language) { ?>
                                     <li<?php if ($key == $currentLanguage) { echo ' class="active"'; } ?>>
-                                        <a href="index.php?step=<?php echo !empty($_GET['step']) ? ((int)$_GET['step']) : \Plugin\Install\Helper::$firstStep; ?>&amp;lang=<?php echo htmlspecialchars($key); ?>">
+                                        <a href="index.php?step=<?php echo !empty($_GET['step']) ? ((int)$_GET['step']) : \Ip\Internal\Install\Helper::$firstStep; ?>&amp;lang=<?php echo htmlspecialchars($key); ?>">
                                             <?php echo htmlspecialchars($language); ?>
                                         </a>
                                     </li>
@@ -38,7 +38,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-3">
-                        <?php echo \Plugin\Install\Helper::generateMenu(!empty($_GET['step']) ? $_GET['step'] : \Plugin\Install\Helper::$firstStep); ?>
+                        <?php echo \Ip\Internal\Install\Helper::generateMenu(!empty($_GET['step']) ? $_GET['step'] : \Ip\Internal\Install\Helper::$firstStep); ?>
                     </div>
                     <div class="col-md-9 ipsContent">
                         <?php echo ipBlock('main')->render(); ?>
@@ -51,7 +51,7 @@
         </div>
     </div>
 </div>
-<iframe style="width:0;height:0;border:none;" border="0" src="http://www.impresspages.org/installationscript2/?step=<?php echo !empty($_GET['step']) && $_GET['step'] >=\Plugin\Install\Helper::$firstStep ? (int)$_GET['step'] : \Plugin\Install\Helper::$firstStep; ?>"></iframe>
+<iframe style="width:0;height:0;border:none;" border="0" src="http://www.impresspages.org/installationscript2/?step=<?php echo !empty($_GET['step']) && $_GET['step'] >=\Ip\Internal\Install\Helper::$firstStep ? (int)$_GET['step'] : \Ip\Internal\Install\Helper::$firstStep; ?>"></iframe>
 
 <?php if (!empty($requiredJs)) { ?>
     <?php foreach($requiredJs as $jsFile) { ?>

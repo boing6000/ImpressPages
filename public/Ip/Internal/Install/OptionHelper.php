@@ -3,7 +3,7 @@
  * @package   ImpressPages
  */
 
-namespace Plugin\Install;
+namespace Ip\Internal\Install;
 
 
 

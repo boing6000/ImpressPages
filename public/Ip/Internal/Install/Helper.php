@@ -3,7 +3,7 @@
  * @package   ImpressPages
  */
 
-namespace Plugin\Install;
+namespace Ip\Internal\Install;
 
 
 class Helper
@@ -41,6 +41,7 @@ class Helper
         $content = ipView($view, $data)->render();
 
         $response = new LayoutResponse();
+        $response->setLayout(ipFile('Ip/Internal/Install/view/layout.php'));
         $response->setContent($content);
 
         return $response;
@@ -372,7 +373,7 @@ class Helper
             'plugins' => array(),
             'languages' => array(),
             'pages' => array(),
-            'locale' => isset($_SESSION['installationLanguage']) ? $_SESSION['installationLanguage'] : \Plugin\Install\Helper::$defaultLanguageCode,
+            'locale' => isset($_SESSION['installationLanguage']) ? $_SESSION['installationLanguage'] : \Ip\Internal\Install\Helper::$defaultLanguageCode,
             'doSupport' => $_SESSION['config']['support'],
             'administrators' => array(array(
                 'id' => 'install',

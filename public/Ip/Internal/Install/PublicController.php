@@ -5,7 +5,7 @@
  *
  */
 
-namespace Plugin\Install;
+namespace Ip\Internal\Install;
 
 class PublicController extends \Ip\Controller
 {
@@ -79,6 +79,7 @@ class PublicController extends \Ip\Controller
                 $response = new LayoutResponse();
         }
 
+        $response->setLayout(ipFile('Ip/Internal/Install/view/layout.php'));
         return $response;
     }
 
