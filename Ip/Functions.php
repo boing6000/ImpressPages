@@ -492,11 +492,12 @@ if (!function_exists('ipFile')) {
      */
     function ipFile($path)
     {
-        global $ipFile_baseDir, $ipFile_overrides; // Optimization: caching these values speeds things up a lot.
+        global $ipFile_baseDir, $ipFile_overrides, $ipFile_publicDir; // Optimization: caching these values speeds things up a lot.
 
         if (!$ipFile_baseDir) {
             $ipFile_baseDir = ipConfig()->get('baseDir');
             $ipFile_overrides = ipConfig()->get('fileOverrides');
+            $ipFile_publicDir = ipConfig()->get('publicDir');
         }
 
         if ($ipFile_overrides) {
@@ -505,6 +506,14 @@ if (!function_exists('ipFile')) {
                     return substr_replace($path, $newPath, 0, strlen($prefix));
                 }
             }
+        }
+
+        if (
+            strpos($path, 'Ip/Internal/') === 0 ||
+            strpos($path, 'Plugin/') === 0 ||
+            strpos($path, 'Theme/') === 0
+        ) {
+            return $ipFile_publicDir . '/' . $path;
         }
 
         return $ipFile_baseDir . '/' . $path;

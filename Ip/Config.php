@@ -60,6 +60,10 @@ class Config
             $this->config['baseDir'] = realpath(dirname(__DIR__));
         }
 
+        if (empty($this->config['publicDir'])) {
+            $this->config['publicDir'] = realpath(dirname(dirname(dirname(dirname(__DIR__)))) . '/public');
+        }
+
         if (empty($this->config['charset'])) {
             $this->config['charset'] = 'UTF-8';
         }
