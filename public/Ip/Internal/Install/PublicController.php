@@ -7,6 +7,8 @@
 
 namespace Ip\Internal\Install;
 
+use Ip\Response\Redirect;
+
 class PublicController extends \Ip\Controller
 {
     protected function init()
@@ -23,11 +25,6 @@ class PublicController extends \Ip\Controller
         if (empty($_SESSION['websiteId'])) {
             $_SESSION['websiteId'] = Helper::randString(32);
         }
-
-        ipAddJs('Plugin/Install/assets/js/jquery.js');
-        ipAddJs('Plugin/Install/assets/js/bootstrap.js');
-        ipAddJs('Plugin/Install/assets/js/ModuleInstall.js');
-        ipAddJs('Plugin/Install/assets/js/install.js');
     }
 
     public function testSessions()
@@ -59,7 +56,7 @@ class PublicController extends \Ip\Controller
 
         // going to the last step
         if (!Helper::isInstallAvailable() || $step > Helper::$lastStep) {
-            $step = Helper::$lastStep;
+            return new Redirect(ipConfig()->baseUrl());
         }
 
         switch ($step) {

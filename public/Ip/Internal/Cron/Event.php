@@ -12,7 +12,7 @@ class Event
          The best solution is to setup cron service to launch file www.yoursite.com/ip_cron.php few times a day.
          By default fake cron is enabled
         */
-        if (\Ip\Internal\Admin\Model::isSafeMode() || !ipGetOption('Config.automaticCron', 1)) {
+        if (!ipConfig()->database() || \Ip\Internal\Admin\Model::isSafeMode() || !ipGetOption('Config.automaticCron', 1)) {
             return;
         }
 
