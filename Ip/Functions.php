@@ -511,7 +511,8 @@ if (!function_exists('ipFile')) {
         if (
             strpos($path, 'Ip/Internal/') === 0 ||
             strpos($path, 'Plugin/') === 0 ||
-            strpos($path, 'Theme/') === 0
+            strpos($path, 'Theme/') === 0 ||
+            strpos($path, 'file/') === 0
         ) {
             return $ipFile_publicDir . '/' . $path;
         }
