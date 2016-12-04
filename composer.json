@@ -4,10 +4,32 @@
     "phpmailer/phpmailer": "~5.2.16",
     "psr/log": "~1.0.2",
     "zendframework/zend-i18n": "~2.7.3",
-    "zendframework/zend-servicemanager": "~2.7.7"
+    "zendframework/zend-servicemanager": "~2.7.7",
+    "impresspages/impresspages": "4.10.0"
   },
-  "config": {
-    "vendor-dir": "Ip/Lib/vendor"
-  },
+  "repositories": [
+    {
+      "type": "package",
+      "package": {
+        "name": "impresspages/impresspages",
+        "version": "4.10.0",
+        "source": {
+          "url": "https://github.com/impresspages/ImpressPages.git",
+          "type": "git",
+          "reference": "v4.10.0"
+        },
+        "autoload": {
+          "psr-4": {"Ip\\": "Ip/"}
+        },
+        "require": {
+          "aura/router": "~2.3.1",
+          "phpmailer/phpmailer": "~5.2.16",
+          "psr/log": "~1.0.2",
+          "zendframework/zend-i18n": "~2.7.3",
+          "zendframework/zend-servicemanager": "~2.7.7"
+        }
+      }
+    }
+  ],
   "minimum-stability": "stable"
 }

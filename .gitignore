@@ -3,9 +3,8 @@
 /.settings
 /.idea
 /project
-/file
-/robots.txt
-/Ip/Lib/vendor
+/public/file
+/vendor
 
 /phpunit/Tmp
 

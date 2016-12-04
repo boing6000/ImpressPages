@@ -9,9 +9,7 @@ if ((PHP_MAJOR_VERSION < 5) || (PHP_MAJOR_VERSION == 5 && PHP_MINOR_VERSION < 5)
     exit;
 }
 
-require_once(__DIR__ . '/../Ip/Application.php');
-
-
+require_once __DIR__.'/../../vendor/autoload.php';
 $application = new \Ip\Application(__DIR__ . '/config.php');
 $application->init();
 $options = array(
