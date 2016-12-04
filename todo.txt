@@ -2,8 +2,8 @@
 ToDo
 + remove values from config.php
 + replace internal autoloader with psr
-- remove "if (!function_exists('ipFile')) {" from functions.php
-- remove $ipFile_overrides
++ remove "if (!function_exists('ipFile')) {" from functions.php
++ remove $ipFile_overrides
 - make sure bin dosen't go to ZIP
 - handle "file" dir
 
