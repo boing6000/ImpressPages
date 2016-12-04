@@ -409,7 +409,7 @@ class PublicController extends \Ip\Controller
             $adminPassword = $admin['password'];
         }
 
-        $cachedBaseUrl = substr(rtrim(ipConfig()->baseUrl(),"/"), 0, - strlen('install'));
+        $cachedBaseUrl = ipConfig()->baseUrl();
 
         try {
             ipConfig()->set('db', $dbConfig);
@@ -430,7 +430,7 @@ class PublicController extends \Ip\Controller
         }
 
         try {
-            Model::writeConfigFile($configToFile, ipFile('config.php'));
+                Model::writeConfigFile($configToFile, dirname(ipConfig()->get('publicDir')) . '/config.php');
         } catch (\Exception $e) {
             $_SESSION['db_errors'][] = 'Cannot write config file';
             return \Ip\Response\JsonRpc::error(__('Can\'t write configuration "/config.php"', 'Install', false));
