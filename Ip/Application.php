@@ -423,11 +423,7 @@ class Application
         $config = new \Ip\Config($config);
         \Ip\ServiceLocator::setConfig($config);
 
-        $autoloader = new \Ip\Autoloader();
-        spl_autoload_register(array($autoloader, 'load'));
-
         require_once __DIR__ . '/Functions.php';
-
 
         $this->prepareEnvironment($options);
         $request = new \Ip\Request();
