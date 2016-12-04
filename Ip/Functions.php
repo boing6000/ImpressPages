@@ -492,20 +492,11 @@ function _e($text, $domain, $esc = 'html')
  */
 function ipFile($path)
 {
-    global $ipFile_baseDir, $ipFile_overrides, $ipFile_publicDir; // Optimization: caching these values speeds things up a lot.
+    global $ipFile_baseDir, $ipFile_publicDir; // Optimization: caching these values speeds things up a lot.
 
     if (!$ipFile_baseDir) {
         $ipFile_baseDir = ipConfig()->get('baseDir');
-        $ipFile_overrides = ipConfig()->get('fileOverrides');
         $ipFile_publicDir = ipConfig()->get('publicDir');
-    }
-
-    if ($ipFile_overrides) {
-        foreach ($ipFile_overrides as $prefix => $newPath) {
-            if (strpos($path, $prefix) === 0) {
-                return substr_replace($path, $newPath, 0, strlen($prefix));
-            }
-        }
     }
 
     if (
