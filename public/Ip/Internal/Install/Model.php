@@ -151,7 +151,7 @@ class Model
  * @package ImpressPages
  */
 
- return array(" . $configCode . "\n);";
+ return [" . $configCode . "\n];";
 
         file_put_contents($filename, $configCode);
     }
