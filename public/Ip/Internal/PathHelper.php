@@ -43,15 +43,23 @@ class PathHelper
         }
 
         $baseDir = ipConfig()->get('baseDir');
-
         $baseDir = str_replace('\\', '/', $baseDir);
-        if (strpos($absoluteFile, $baseDir) !== 0) {
-            throw new \Ip\Exception('Cannot find relative path for file ' . esc($absoluteFile));
+        if (strpos($absoluteFile, $baseDir) === 0) {
+            $relativeFile = substr($absoluteFile, strlen($baseDir) + 1);
+
+            return substr($relativeFile, 0, strrpos($relativeFile, '/') + 1);
         }
 
-        $relativeFile = substr($absoluteFile, strlen($baseDir) + 1);
+        $publicDir = ipConfig()->get('publicDir');
+        $publicDir = str_replace('\\', '/', $publicDir);
+        if (strpos($absoluteFile, $publicDir) === 0) {
+            $relativeFile = substr($absoluteFile, strlen($publicDir) + 1);
 
-        return substr($relativeFile, 0, strrpos($relativeFile, '/') + 1);
+            return substr($relativeFile, 0, strrpos($relativeFile, '/') + 1);
+        }
+
+
+        throw new \Ip\Exception('Cannot find relative path for file ' . esc($absoluteFile));
     }
 
 }
