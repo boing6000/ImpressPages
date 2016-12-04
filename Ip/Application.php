@@ -410,7 +410,11 @@ class Application
         if ($this->config) {
             $config = $this->config;
         } else {
-            $config = require($this->configPath);
+            if (is_file($this->configPath)) {
+                $config = require($this->configPath);
+            } else {
+                $config = [];
+            }
         }
 
         if (!is_array($config)) {
