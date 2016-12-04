@@ -9,24 +9,40 @@
 namespace Ip\Internal\Install;
 
 
+use Ip\Language;
+
 class Job
 {
 
     public static function ipRouteAction_0($info)
     {
+        if (!ipConfig()->isEmpty()) {
+            return null;
+        }
         return array(
             'plugin' => 'Install',
             'controller' => 'PublicController',
             'action' => 'index',
         );
+    }
 
-        if (Model::isLoginPage($info['request'])) {
-            return array(
-                'plugin' => 'Admin',
-                'controller' => 'SiteController',
-                'action' => 'login',
-            );
+    public static function ipRouteLanguage_0($info)
+    {
+        if (!ipConfig()->isEmpty()) {
+            return null;
         }
-        return null;
+
+        $code = 'en';
+        if (!empty($_SESSION['installationLanguage'])) {
+            $code = $_SESSION['installationLanguage'];
+        }
+        if (!empty(ipRequest()->getQuery('lang'))) {
+            $code = ipRequest()->getQuery('lang');
+        }
+        $_SESSION['installationLanguage'] = $code;
+        return [
+            'relativeUri' => '',
+            'language' => new Language(null, $code, $code, $code, $code, '1', 'ltr')
+            ];
     }
 }
