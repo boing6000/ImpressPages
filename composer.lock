@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b96bba973fd93ea119cdcbf84bfa5c9f",
-    "content-hash": "ce1d0ee21eb2febc3163c8c390a3ac13",
+    "hash": "bf60368424ca7182c1cc6ecf60245820",
+    "content-hash": "e3a74afbf704ba7e6bfa3029509be92c",
     "packages": [
         {
             "name": "aura/router",
@@ -89,12 +89,18 @@
             "time": "2014-12-30 15:22:37"
         },
         {
-            "name": "impresspages/impresspages",
-            "version": "4.10.0",
+            "name": "impresspages/core",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/impresspages/ImpressPages.git",
-                "reference": "v4.10.0"
+                "url": "https://github.com/impresspages/core.git",
+                "reference": "d66570e5d78e57d59d2755f9982201577d80de09"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/impresspages/core/zipball/d66570e5d78e57d59d2755f9982201577d80de09",
+                "reference": "d66570e5d78e57d59d2755f9982201577d80de09",
+                "shasum": ""
             },
             "require": {
                 "aura/router": "~2.3.1",
@@ -108,7 +114,13 @@
                 "psr-4": {
                     "Ip\\": "Ip/"
                 }
-            }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT",
+                "GPL-3.0+"
+            ],
+            "time": "2016-12-06 21:54:31"
         },
         {
             "name": "phpmailer/phpmailer",
@@ -385,7 +397,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "impresspages/core": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
