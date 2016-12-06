@@ -67,11 +67,10 @@ class Config
         }
 
         if (empty($this->config['coreDir'])) {
-            //check if this installation made based on ZIP
-            if (is_file(getcwd() . '/Ip/vendor/impresspages/impresspages')) {
-                $this->config['coreDir'] = realpath(is_file(getcwd() . '/Ip/vendor/impresspages/impresspages'));
+            if ($this->isComposerCore()) {
+                $this->config['coreDir'] = realpath(dirname(getcwd()) . '/vendor/impresspages/impresspages');
             } else {
-                $this->config['coreDir'] = realpath(dirname(getcwd()).'/vendor/impresspages/impresspages');
+                $this->config['coreDir'] = realpath(getcwd() . '/Ip/vendor/impresspages/impresspages');
             }
         }
 
@@ -200,5 +199,22 @@ class Config
     public function isEmpty()
     {
         return $this->isConfigEmpty;
+    }
+
+    public function isComposerCore()
+    {
+        return is_file(dirname(getcwd()) . '/vendor/impresspages/impresspages');
+    }
+
+    /**
+     * @return string - path to the configuration file
+     */
+    public function configFile()
+    {
+        if ($this->isComposerCore()) {
+            return dirname($this->get('baseDir')) . "/config.php";
+        } else {
+            return $this->get('baseDir') . "/config.php";
+        }
     }
 }
