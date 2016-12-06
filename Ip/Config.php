@@ -63,11 +63,11 @@ class Config
         }
 
         if (empty($this->config['baseDir'])) {
-            $this->config['baseDir'] = realpath(dirname(__DIR__));
+            $this->config['baseDir'] = realpath(getcwd());
         }
 
-        if (empty($this->config['publicDir'])) {
-            $this->config['publicDir'] = realpath(dirname(dirname(dirname(dirname(__DIR__)))) . '/public');
+        if (empty($this->config['coreDir'])) {
+            $this->config['coreDir'] = realpath(dirname(getcwd()).'/vendor/impresspages/impresspages');//realpath(dirname(dirname(dirname(dirname(__DIR__)))) . '/public');
         }
 
         if (empty($this->config['charset'])) {

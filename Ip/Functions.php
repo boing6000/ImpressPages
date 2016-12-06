@@ -492,11 +492,11 @@ function _e($text, $domain, $esc = 'html')
  */
 function ipFile($path)
 {
-    global $ipFile_baseDir, $ipFile_publicDir; // Optimization: caching these values speeds things up a lot.
+    global $ipFile_baseDir, $ipFile_coreDir; // Optimization: caching these values speeds things up a lot.
 
     if (!$ipFile_baseDir) {
         $ipFile_baseDir = ipConfig()->get('baseDir');
-        $ipFile_publicDir = ipConfig()->get('publicDir');
+        $ipFile_coreDir = ipConfig()->get('coreDir');
     }
 
     if (
@@ -505,10 +505,10 @@ function ipFile($path)
         strpos($path, 'Theme/') === 0 ||
         strpos($path, 'file/') === 0
     ) {
-        return $ipFile_publicDir . '/' . $path;
+        return $ipFile_baseDir . '/' . $path;
     }
 
-    return $ipFile_baseDir . '/' . $path;
+    return $ipFile_coreDir . '/' . $path;
 }
 
 
