@@ -40,8 +40,6 @@ class Model
             }
         }
 
-        $currentRevision = ipContent()->getCurrentRevision();
-
         $variables = array(
             'widgetsHtml' => $widgetsHtml,
             'blockName' => $blockName,
