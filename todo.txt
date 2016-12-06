@@ -4,7 +4,6 @@ ToDo
 + replace internal autoloader with psr
 + remove "if (!function_exists('ipFile')) {" from functions.php
 + remove $ipFile_overrides
-- make sure bin dosen't go to ZIP
 - handle "file" dir
 - 'TTF_folder' => ipFile('Ip/Lib/HnCaptcha/fonts/'),
 
@@ -15,3 +14,5 @@ Incompatabilities:
 Test:
 
 - theme / plugin view overrides
+- windows install / update / overrides
+- repository
