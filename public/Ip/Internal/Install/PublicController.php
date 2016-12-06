@@ -430,7 +430,7 @@ class PublicController extends \Ip\Controller
         }
 
         try {
-                Model::writeConfigFile($configToFile, dirname(ipConfig()->get('publicDir')) . '/config.php');
+                Model::writeConfigFile($configToFile, dirname(ipConfig()->get('baseDir')) . '/config.php');
         } catch (\Exception $e) {
             $_SESSION['db_errors'][] = 'Cannot write config file';
             return \Ip\Response\JsonRpc::error(__('Can\'t write configuration "/config.php"', 'Install', false));

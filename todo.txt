@@ -6,6 +6,7 @@ ToDo
 + remove $ipFile_overrides
 - make sure bin dosen't go to ZIP
 - handle "file" dir
+- 'TTF_folder' => ipFile('Ip/Lib/HnCaptcha/fonts/'),
 
 Incompatabilities:
 

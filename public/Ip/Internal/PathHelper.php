@@ -50,10 +50,10 @@ class PathHelper
             return substr($relativeFile, 0, strrpos($relativeFile, '/') + 1);
         }
 
-        $publicDir = ipConfig()->get('publicDir');
-        $publicDir = str_replace('\\', '/', $publicDir);
-        if (strpos($absoluteFile, $publicDir) === 0) {
-            $relativeFile = substr($absoluteFile, strlen($publicDir) + 1);
+        $coreDir = ipConfig()->get('coreDir');
+        $coreDir = str_replace('\\', '/', $coreDir);
+        if (strpos($absoluteFile, $coreDir) === 0) {
+            $relativeFile = substr($absoluteFile, strlen($coreDir) + 1);
 
             return substr($relativeFile, 0, strrpos($relativeFile, '/') + 1);
         }
