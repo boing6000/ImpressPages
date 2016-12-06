@@ -42,13 +42,6 @@ class PathHelper
             }
         }
 
-        $baseDir = ipConfig()->get('baseDir');
-        $baseDir = str_replace('\\', '/', $baseDir);
-        if (strpos($absoluteFile, $baseDir) === 0) {
-            $relativeFile = substr($absoluteFile, strlen($baseDir) + 1);
-
-            return substr($relativeFile, 0, strrpos($relativeFile, '/') + 1);
-        }
 
         $coreDir = ipConfig()->get('coreDir');
         $coreDir = str_replace('\\', '/', $coreDir);
@@ -58,6 +51,13 @@ class PathHelper
             return substr($relativeFile, 0, strrpos($relativeFile, '/') + 1);
         }
 
+        $baseDir = ipConfig()->get('baseDir');
+        $baseDir = str_replace('\\', '/', $baseDir);
+        if (strpos($absoluteFile, $baseDir) === 0) {
+            $relativeFile = substr($absoluteFile, strlen($baseDir) + 1);
+
+            return substr($relativeFile, 0, strrpos($relativeFile, '/') + 1);
+        }
 
         throw new \Ip\Exception('Cannot find relative path for file ' . esc($absoluteFile));
     }

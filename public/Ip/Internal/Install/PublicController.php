@@ -166,11 +166,15 @@ class PublicController extends \Ip\Controller
             'helpUrl' => 'http://www.impresspages.org/help/php-memory',
             'type' => Helper::checkMemoryLimit()
         );
-        $requirements[] = array(
-            'name' => '/Ip/ ' . __('writable', 'Install') . ' ' . __('(including subfolders and files)', 'Install'),
-            'helpUrl' => 'http://www.impresspages.org/help/ip-dir-writable',
-            'type' => Helper::checkFolderIp()
-        );
+
+        if (!ipConfig()->isComposerCore()) {
+            $requirements[] = array(
+                'name' => '/Ip/ ' . __('writable', 'Install') . ' ' . __('(including subfolders and files)', 'Install'),
+                'helpUrl' => 'http://www.impresspages.org/help/ip-dir-writable',
+                'type' => Helper::checkFolderIp()
+            );
+        }
+
         $requirements[] = array(
             'name' => '/Plugin/ ' . __('writable (including subfolders and files)', 'Install'),
             'helpUrl' => 'http://www.impresspages.org/help/plugin-dir-writable',
@@ -430,7 +434,7 @@ class PublicController extends \Ip\Controller
         }
 
         try {
-                Model::writeConfigFile($configToFile, dirname(ipConfig()->get('baseDir')) . '/config.php');
+                Model::writeConfigFile($configToFile, ipConfig()->configFile());
         } catch (\Exception $e) {
             $_SESSION['db_errors'][] = 'Cannot write config file';
             return \Ip\Response\JsonRpc::error(__('Can\'t write configuration "/config.php"', 'Install', false));

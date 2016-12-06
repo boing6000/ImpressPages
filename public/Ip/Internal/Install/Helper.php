@@ -229,7 +229,7 @@ class Helper
 
     public static function checkFileDotHtaccess()
     {
-        if (!file_exists(Model::ipFile('.htaccess'))) {
+        if (!file_exists(ipConfig()->get('baseDir') . '/.htaccess')) {
             return 'error';
         }
         return 'success';
@@ -281,7 +281,7 @@ class Helper
 
     public static function checkFolderIp()
     {
-        if (!Helper::isDirectoryWritable(Model::ipFile('Ip/'))) {
+        if (!Helper::isDirectoryWritable(ipConfig()->get('baseDir') . '/Ip/')) {
             return 'warning';
         }
         return 'success';
@@ -305,12 +305,14 @@ class Helper
 
     public static function checkFileConfigPhp()
     {
+        $configFile = ipConfig()->configFile();
+
         // if config.php file exists it should be writable
-        if (is_file(Model::ipFile('config.php')) && !is_writable(Model::ipFile('config.php'))) {
+        if (is_file($configFile) && !is_writable($configFile)) {
             return 'error';
         }
         // if config.php file doesn't exist we should be able to create it
-        if (!is_file(Model::ipFile('config.php')) && !is_writable(Model::ipFile(''))) {
+        if (!is_file($configFile) && !is_writable(dirname($configFile))) {
             return 'error';
         }
         return 'success';
