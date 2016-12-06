@@ -67,7 +67,12 @@ class Config
         }
 
         if (empty($this->config['coreDir'])) {
-            $this->config['coreDir'] = realpath(dirname(getcwd()).'/vendor/impresspages/impresspages');//realpath(dirname(dirname(dirname(dirname(__DIR__)))) . '/public');
+            //check if this installation made based on ZIP
+            if (is_file(getcwd() . '/Ip/vendor/impresspages/impresspages')) {
+                $this->config['coreDir'] = realpath(is_file(getcwd() . '/Ip/vendor/impresspages/impresspages'));
+            } else {
+                $this->config['coreDir'] = realpath(dirname(getcwd()).'/vendor/impresspages/impresspages');
+            }
         }
 
         if (empty($this->config['charset'])) {
