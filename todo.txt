@@ -8,6 +8,7 @@ ToDo
 - 'TTF_folder' => ipFile('Ip/Lib/HnCaptcha/fonts/'),
 + remove config.php from GIT to ease the development
 - update readme
+- fix automated tests
 
 Incompatabilities:
 
@@ -15,6 +16,7 @@ Incompatabilities:
 
 Test:
 
+- update
 - theme / plugin view overrides
 - windows install / update / overrides
 - repository
