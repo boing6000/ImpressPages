@@ -6,7 +6,8 @@ ToDo
 + remove $ipFile_overrides
 + handle "file" dir
 - 'TTF_folder' => ipFile('Ip/Lib/HnCaptcha/fonts/'),
-- remove config.php from GIT to ease the development
++ remove config.php from GIT to ease the development
+- update readme
 
 Incompatabilities:
 

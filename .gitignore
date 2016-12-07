@@ -7,5 +7,5 @@
 /vendor
 
 /phpunit/Tmp
-
+/config.php
 
