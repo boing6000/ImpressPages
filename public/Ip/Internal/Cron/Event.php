@@ -22,6 +22,12 @@ class Event
             return;
         }
 
+        $lastFailureAt = \Ip\ServiceLocator::storage()->get('Cron', 'lastFailureAt');
+        if ($lastFailureAt && (date('Y-m-d H') == date('Y-m-d H', $lastFailureAt))) {
+            // we had an error this hour
+            return;
+        }
+
         if (function_exists('curl_init')) {
             $ch = curl_init();
             $url = ipConfig()->baseUrl() . '?pa=Cron&pass=' . urlencode(ipGetOption('Config.cronPassword'));
@@ -38,6 +44,7 @@ class Event
             $fakeCronAnswer = curl_exec($ch);
 
             if ($fakeCronAnswer != __('OK', 'Ip-admin', false)) {
+                ipStorage()->set('Cron', 'lastFailureAt', time());
                 ipLog()->error('Cron.failedFakeCron', array('result' => $fakeCronAnswer, 'type' => 'curl', 'error' => curl_error($ch)));
             }
 
