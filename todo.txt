@@ -5,10 +5,11 @@ ToDo
 + remove "if (!function_exists('ipFile')) {" from functions.php
 + remove $ipFile_overrides
 + handle "file" dir
-- 'TTF_folder' => ipFile('Ip/Lib/HnCaptcha/fonts/'),
++ 'TTF_folder' => ipFile('Ip/Lib/HnCaptcha/fonts/'),
 + remove config.php from GIT to ease the development
-- update readme
++ update readme
 - fix automated tests
+- disable auto-update if composer is present
 
 Incompatabilities:
 
@@ -17,7 +18,8 @@ Incompatabilities:
 Test:
 
 - update
-- theme / plugin view overrides
++ theme / overrides
++ plugin view overrides
 - windows install / update / overrides
 - repository
 - css compile
