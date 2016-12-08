@@ -11,7 +11,7 @@ ToDo
 - fix automated tests
 - disable auto-update if composer is present
 
-Incompatabilities:
+Incompatibilities:
 
 - removed support of fileOverrides
 
