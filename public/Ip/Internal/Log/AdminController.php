@@ -54,9 +54,11 @@ class AdminController extends \Ip\GridController
         $context = json_decode($recordData['context'], true);
 
         $replace = array();
-        foreach ($context as $key => $val) {
-            if (is_string($val) || is_numeric($val)) {
-                $replace['{' . $key . '}'] = '<em>' . esc($val) . '</em>';
+        if (is_array($context)) {
+            foreach ($context as $key => $val) {
+                if (is_string($val) || is_numeric($val)) {
+                    $replace['{' . $key . '}'] = '<em>' . esc($val) . '</em>';
+                }
             }
         }
 
