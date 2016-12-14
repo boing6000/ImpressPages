@@ -21,7 +21,7 @@ Test:
 + theme / overrides
 + plugin view overrides
 - windows install / update / overrides
-- repository
++ repository
 - css compile
 - core compile
 
