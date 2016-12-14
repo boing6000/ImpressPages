@@ -11,7 +11,7 @@ class PageAssets extends \Ip\Internal\PageAssets
         $cacheVersion = $this->getCacheVersion();
         $javascriptFiles = $this->getJavascript();
 
-        $javascriptFilesSorted = array();
+        $javascriptFilesSorted = [];
         foreach ($javascriptFiles as $level) {
             foreach ($level as &$file) {
                 if ($file['type'] == 'file' && $file['cacheFix']) {

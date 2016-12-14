@@ -104,7 +104,7 @@ class PublicController extends \Ip\Controller
     protected function systemCheck()
     {
 
-        $requirements = array();
+        $requirements = [];
 
         if (!Helper::isApache() && !Helper::isNginx()) {
             $requirements[] = array(
@@ -198,7 +198,7 @@ class PublicController extends \Ip\Controller
 
         $showNextStep = true;
         $autoForward = true;
-        $notSuccess = array();
+        $notSuccess = [];
         foreach ($requirements as $req) {
             if ($req['type'] == 'success') { continue; } // skipping
 
@@ -276,7 +276,7 @@ class PublicController extends \Ip\Controller
         }
 
         // Validating input
-        $errors = array();
+        $errors = [];
 
         // Website name
         if (!Helper::validateWebsiteName(ipRequest()->getPost('configWebsiteName'))) {
@@ -329,7 +329,7 @@ class PublicController extends \Ip\Controller
 
         $db = ipRequest()->getPost('db');
         if (!isset($_SESSION['db_errors'])) {
-            $_SESSION['db_errors'] = array();
+            $_SESSION['db_errors'] = [];
         }
 
         foreach (array('hostname', 'username', 'database') as $key) {
@@ -397,7 +397,7 @@ class PublicController extends \Ip\Controller
         $dbConfig['database'] = $db['database'];
         $_SESSION['db'] = $dbConfig;
 
-        $configToFile = array();
+        $configToFile = [];
         $configToFile['sessionName'] = 'ses' . rand();
         $configToFile['db'] = $_SESSION['db'];
         $configToFile['timezone'] = $_SESSION['config']['timezone'];

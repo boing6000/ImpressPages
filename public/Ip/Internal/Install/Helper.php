@@ -15,7 +15,7 @@ class Helper
 
     public static function getInstallationLanguages()
     {
-        $languages = array();
+        $languages = [];
         $languages['en'] = 'English';
         $languages['ar'] = 'Arabic';
         $languages['cn'] = 'Chinese';
@@ -36,7 +36,7 @@ class Helper
         return $languages;
     }
 
-    public static function renderLayout($view, $data = array())
+    public static function renderLayout($view, $data = [])
     {
         $content = ipView($view, $data)->render();
 
@@ -118,7 +118,7 @@ class Helper
     public static function generateMenu($curStep)
     {
 
-        $steps = array();
+        $steps = [];
 //        $steps[] = __('Language selection', 'Install');
         $steps[1] = __('Configuration', 'Install');
         $steps[2] = __('System check', 'Install');
@@ -362,9 +362,9 @@ class Helper
             'action' => $action,
             'data' => $data,
             'websiteId' => $_SESSION['websiteId'],
-            'plugins' => array(),
-            'languages' => array(),
-            'pages' => array(),
+            'plugins' => [],
+            'languages' => [],
+            'pages' => [],
             'locale' => isset($_SESSION['installationLanguage']) ? $_SESSION['installationLanguage'] : \Ip\Internal\Install\Helper::$defaultLanguageCode,
             'doSupport' => !empty($_SESSION['config']['support']),
             'administrators' => array(array(

@@ -42,16 +42,16 @@ class Module
      */
     function addEmail($from, $fromName, $to, $toName, $subject, $email, $immediate, $html, $files = null)
     {
-        $cached_files = array();
-        $cached_fileNames = array();
-        $cached_fileMimeTypes = array();
+        $cached_files = [];
+        $cached_fileNames = [];
+        $cached_fileMimeTypes = [];
         if ($files) {
             if (is_string($files)) {
                 $files = array($files);
             }
 
             foreach ($files as $fileSetting) {
-                $file = array();
+                $file = [];
                 if (is_array($fileSetting)) {
                     $file['real_name'] = $fileSetting[0];
                     $file['required_name'] = basename($fileSetting[1]);

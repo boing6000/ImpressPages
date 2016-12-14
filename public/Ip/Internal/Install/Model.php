@@ -50,7 +50,7 @@ class Model
         $sql = str_replace("DROP TABLE IF EXISTS `ip_", "DROP TABLE IF EXISTS `". $tablePrefix, $sql);
         $sql = str_replace("CREATE TABLE `ip_", "CREATE TABLE `".$tablePrefix, $sql);
 
-        $errors = array();
+        $errors = [];
         ipDb()->execute($sql);
 
         return $errors;
@@ -58,7 +58,7 @@ class Model
 
     public static function importData($tablePrefix)
     {
-        $errors = array();
+        $errors = [];
 
         $sqlFile = self::ipFile('Ip/Internal/Install/sql/data.sql');
         $fh = fopen($sqlFile, 'r');

@@ -14,7 +14,7 @@ class Model
         // output:
         // - assets/admin.min.js
 
-        $items = array();
+        $items = [];
         $items[] = ipFile('Ip/Internal/Core/assets/admin/managementMode.js');
         $items[] = ipFile('Ip/Internal/Core/assets/admin/functions.js');
 
@@ -34,7 +34,7 @@ class Model
         // output:
         // - assets/ipCoreJs.min.js
 
-        $items = array();
+        $items = [];
         $items[] = ipFile('Ip/Internal/Core/assets/ipCore/jquery.js'); // default, global jQuery
         $items[] = ipFile('Ip/Internal/Core/assets/ipCore/console.log.js');
         $items[] = ipFile('Ip/Internal/Core/assets/ipCore/functions.js');
@@ -296,7 +296,7 @@ class Model
         //some systems return false instead of empty array if no matches found in glob function
         $files = glob($pattern, $flags);
         if (!is_array($files)) {
-            return array();
+            return [];
         }
 
         $dirs = glob(dirname($pattern) . '/*', GLOB_ONLYDIR | GLOB_NOSORT);
