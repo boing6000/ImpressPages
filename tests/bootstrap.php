@@ -18,5 +18,4 @@ require_once(TEST_BASE_DIR.'/Autoloader.php');
 $autoloader = new \PhpUnit\Autoloader();
 $autoloader->register(TEST_BASE_DIR);
 
-require_once TEST_CODEBASE_DIR . 'Ip/Config.php';
-
+require_once __DIR__.'/../vendor/autoload.php';

@@ -8,7 +8,7 @@ class TestService
 {
     public static function setupTestDatabase($database, $tablePrefix)
     {
-        Model::setInstallationDir(ipFile(''));
+        Model::setInstallationDir(TEST_CODEBASE_DIR . 'public/');
         Model::createDatabaseStructure($database, $tablePrefix);
         Model::importData($tablePrefix);
         OptionHelper::import(__DIR__ . '/options.json');

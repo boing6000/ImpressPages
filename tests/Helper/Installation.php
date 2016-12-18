@@ -393,11 +393,7 @@ class Installation
         }
 
         $folders = array(
-            'Ip',
-            'Plugin',
-            'file',
-            'install',
-            'Theme',
+            'public'
         );
 
         $files = array(

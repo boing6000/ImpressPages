@@ -60,6 +60,8 @@ class AdminController extends \Ip\GridController
                     $replace['{' . $key . '}'] = '<em>' . esc($val) . '</em>';
                 }
             }
+        } else {
+            echo "XXXX" . $recordData['context'] . 'XXX';exit;
         }
 
         $message = esc($recordData['message']);

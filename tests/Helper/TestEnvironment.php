@@ -5,9 +5,6 @@
 
 namespace PhpUnit\Helper;
 
-
-use Plugin\Install\TestService;
-
 class TestEnvironment
 {
     public static function setupOnce()
@@ -21,7 +18,7 @@ class TestEnvironment
         $hasRun = true;
 
         // create test database structure
-        \Plugin\Install\TestService::setupTestDatabase(TEST_DB_NAME, 'ip_');
+        \Ip\Internal\Install\TestService::setupTestDatabase(TEST_DB_NAME, 'ip_');
     }
 
     public static function setup()
@@ -32,8 +29,6 @@ class TestEnvironment
 
     public static function setupCode($configBasename = 'default.php')
     {
-        require_once TEST_CODEBASE_DIR . 'Ip/Application.php';
-
         global $application;
         $application = new \Ip\Application(TEST_FIXTURE_DIR . 'config/' . $configBasename);
 
@@ -42,7 +37,12 @@ class TestEnvironment
         }
 
         //because of PHPUnit magic, we have to repeat it on every test
-        $application->init();
+//
+        require_once TEST_CODEBASE_DIR . 'vendor/impresspages/core/Ip/Functions.php';
+        $config = require(TEST_FIXTURE_DIR . 'config/' . $configBasename);
+        $config = new \Ip\Config($config);
+        \Ip\ServiceLocator::setConfig($config);
+        $application->prepareEnvironment();
 
         static::setupOnce();
 

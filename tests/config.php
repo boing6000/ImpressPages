@@ -12,7 +12,7 @@ define ('TEST_TMP_DIR', TEST_BASE_DIR . 'tmp/');
 define ('TEST_TMP_URL', $isTravis ? 'http://localhost/phpunit/tmp/' : 'http://localhost:8888/ip/phpunit/tmp/');
 define ('TEST_UNWRITABLE_DIR', '/var/tmp/testDir'); //root owned empty dir which can't be writable by Apache process and can't be chmoded. Used by making symbolic links and emulating unwritable dirs in such way.
 
-define ('TEST_DB_HOST', 'localhost');
+define ('TEST_DB_HOST', '127.0.0.1');
 define ('TEST_DB_USER', $isTravis ? 'travis'    : 'root');
 define ('TEST_DB_PASS', $isTravis ? 'travis'    : 'root');
 define ('TEST_DB_NAME', 'ip_test');
