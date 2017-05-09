@@ -7,7 +7,7 @@ if (!empty($argv[1])) {
     $publicDir = $argv[1];
 }
 
-if (str_replace('\\', '/', getcwd()) . '/vendor/impresspages/impresspages/bin' != str_replace('\\', '/', __DIR__)) {
+if (str_replace('\\', '/', getcwd()) . '/vendor/boing6000/impresspages/bin' != str_replace('\\', '/', __DIR__)) {
     throw new \Exception('This script must be executed from the project root (where composer.json is placed');
 }
 
@@ -67,10 +67,10 @@ function createRootFiles($publicDir)
         !is_file($publicDir . '/index.php') &&
         !is_file($publicDir . '/.htaccess')
     ) {
-        copy('vendor/impresspages/impresspages/start-pack/admin.php', $publicDir . '/admin.php');
-        copy('vendor/impresspages/impresspages/start-pack/favicon.ico', $publicDir . '/favicon.ico');
-        copy('vendor/impresspages/impresspages/start-pack/index.php', $publicDir . '/index.php');
-        copy('vendor/impresspages/impresspages/start-pack/.htaccess', $publicDir . '/.htaccess');
+        copy('vendor/boing6000/impresspages/start-pack/admin.php', $publicDir . '/admin.php');
+        copy('vendor/boing6000/impresspages/start-pack/favicon.ico', $publicDir . '/favicon.ico');
+        copy('vendor/boing6000/impresspages/start-pack/index.php', $publicDir . '/index.php');
+        copy('vendor/boing6000/impresspages/start-pack/.htaccess', $publicDir . '/.htaccess');
     }
 }
 
@@ -105,19 +105,19 @@ function createMainDirs($publicDir)
     $pluginDir = $publicDir . '/Plugin';
     if (!is_dir($pluginDir)) {
         AdvancedFs::createPath($pluginDir);
-        AdvancedFs::copyPathContent('vendor/impresspages/impresspages/start-pack/Plugin', $pluginDir);
+        AdvancedFs::copyPathContent('vendor/boing6000/impresspages/start-pack/Plugin', $pluginDir);
     }
 
     $pluginDir = $publicDir . '/Theme';
     if (!is_dir($pluginDir)) {
         AdvancedFs::createPath($pluginDir);
-        AdvancedFs::copyPathContent('vendor/impresspages/impresspages/start-pack/Theme', $pluginDir);
+        AdvancedFs::copyPathContent('vendor/boing6000/impresspages/start-pack/Theme', $pluginDir);
     }
 
     $pluginDir = $publicDir . '/file';
     if (!is_dir($pluginDir)) {
         AdvancedFs::createPath($pluginDir);
-        AdvancedFs::copyPathContent('vendor/impresspages/impresspages/start-pack/file', $pluginDir);
+        AdvancedFs::copyPathContent('vendor/boing6000/impresspages/start-pack/file', $pluginDir);
     }
 }
 
