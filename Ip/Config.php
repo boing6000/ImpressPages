@@ -74,7 +74,7 @@ class Config
 
         if (empty($this->config['coreDir'])) {
             if ($this->isComposerCore()) {
-                $this->config['coreDir'] = realpath(dirname(getcwd()) . '/vendor/impresspages/impresspages');
+                $this->config['coreDir'] = realpath(dirname(getcwd()) . '/vendor/boing6000/impresspages');
             } else {
                 $this->config['coreDir'] = realpath(getcwd());
             }
@@ -227,7 +227,7 @@ class Config
 
     public function isComposerCore()
     {
-        return is_dir(dirname(getcwd()) . '/vendor/impresspages/impresspages');
+        return is_dir(dirname(getcwd()) . '/vendor/boing6000/impresspages');
     }
 
     /**

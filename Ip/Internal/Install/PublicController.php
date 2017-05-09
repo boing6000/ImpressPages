@@ -14,6 +14,7 @@ class PublicController extends \Ip\Controller
 {
     protected function init()
     {
+
         if (ipRequest()->getRequest('debug') !== NULL) {
             $_SESSION['install_debug'] = (int)ipRequest()->getRequest('debug');
         }
@@ -26,6 +27,7 @@ class PublicController extends \Ip\Controller
         if (empty($_SESSION['websiteId'])) {
             $_SESSION['websiteId'] = Helper::randString(32);
         }
+
     }
 
     public function testSessions()
@@ -59,6 +61,7 @@ class PublicController extends \Ip\Controller
         if ($step < Helper::$firstStep) {
             $step = Helper::$firstStep;
         }
+
 
         // going to the last step
         if (!Helper::isInstallAvailable() || $step > Helper::$lastStep) {

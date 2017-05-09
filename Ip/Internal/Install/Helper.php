@@ -27,7 +27,7 @@ class Helper
         $languages['ja'] = '日本語';
         $languages['lt'] = 'Lietuvių';
         $languages['hu'] = 'Magyar';
-      $languages['pt'] = 'Portugues'; // Something is broken with translations.
+        $languages['pt'] = 'Portugues'; // Something is broken with translations.
         $languages['pl'] = 'Polski';
         $languages['ro'] = 'Română';
         $languages['ru'] = 'Русский';

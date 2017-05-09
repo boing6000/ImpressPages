@@ -30,6 +30,7 @@ class PathHelper
 
         $coreDir = ipConfig()->get('coreDir');
         $coreDir = str_replace('\\', '/', $coreDir);
+
         if (strpos($absoluteFile, $coreDir) === 0) {
             $relativeFile = substr($absoluteFile, strlen($coreDir) + 1);
 
@@ -50,18 +51,21 @@ class PathHelper
             $rootDir = dirname(ipConfig()->get('baseDir'));
             $coreDir = ipConfig()->get('coreDir');
             $vendorDepth = count(explode('/', substr($coreDir, strlen($rootDir)))) - 1;
+
             if (strpos($absoluteFile, $rootDir) === 0) {
                 $rootRelativeFile = substr($absoluteFile, strlen($rootDir) + 1);
                 $parts = explode('/', $rootRelativeFile);
                 if (count($parts) >= $vendorDepth) {
                     $composerPluginPaths = ipConfig()->get('composerPluginPaths');
                     $pluginComposerPath = implode('/', array_slice($parts, 0, $vendorDepth));
+
                     if (!empty($composerPluginPaths[$pluginComposerPath])) {
                         $relativeFile = 'Plugin/' . $composerPluginPaths[$pluginComposerPath] . '/' . substr($rootRelativeFile, strlen($pluginComposerPath) + 1);
                         return dirname($relativeFile) . '/';
                     }
                 }
             }
+
         }
 
         throw new \Ip\Exception('Cannot find relative path for file ' . esc($absoluteFile));
