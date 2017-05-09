@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
   "name": "boing6000/impresspages",
-=======
-  "name": "impresspages/impresspages",
->>>>>>> refs/remotes/impresspages/develop
   "require": {
     "php": ">=5.5.0",
     "aura/router": "~2.3.1",
