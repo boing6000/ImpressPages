@@ -86,7 +86,9 @@ class Model
             $moduleItem->setTitle(__($plugin['title'], 'Ip-admin', false));
             $moduleItem->setUrl(ipActionUrl(array('aa' => $plugin['name'])));
             $moduleItem->setIcon($this->getAdminMenuPluginIcon($plugin['name']));
+
             $moduleItem->setAlias($plugin['name']);
+
             if ($plugin['name'] == $currentModule) {
                 $moduleItem->markAsCurrent(true);
             }
