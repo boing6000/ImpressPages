@@ -41,7 +41,7 @@ class LessCompiler
         $css = '';
 
         try {
-            require_once ipFile('Ip/Lib/less.php/Less.php');
+            require_once ipFile('Ip/Lib/lessphp/Less.php');
             $themeDir = ipFile('Theme/' . $themeName . '/assets/');
             $ipContentDir = ipFile('Ip/Internal/Core/assets/ipContent/');
 

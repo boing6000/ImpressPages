@@ -41,13 +41,13 @@ INSERT INTO `ip_widget_order` (`widgetName`, `priority`) VALUES
 
 INSERT INTO `ip_storage` (`plugin`, `key`, `value`) VALUES
 ('Admin', 'failedLogins', '[]'),
-('Config', 'Config.en.websiteTitle', '""'),
-('Config', 'Config.en.websiteEmail', '"example@example.com"'),
+('Config', 'Config.pt.websiteTitle', '""'),
+('Config', 'Config.pt.websiteEmail', '"example@example.com"'),
 ('Config', 'Config.automaticCron', '"1"'),
 ('Config', 'Config.cronPassword', '123456'),
 ('Config', 'Config.defaultImageQuality', '80'),
 ('Config', 'Config.availableFonts', '"Arial,Arial,Helvetica,sans-serif\\nArial Black,Arial Black,Gadget,sans-serif\\nComic Sans MS,Comic Sans MS,cursive\\nCourier New,Courier New,Courier,monospace\\nGeorgia,Georgia,serif\\nImpact,Charcoal,sans-serif\\nLucida Console,Monaco,monospace\\nLucida Sans Unicode,Lucida Grande,sans-serif\\nPalatino Linotype,Book Antiqua,Palatino,serif\\nTahoma,Geneva,sans-serif\\nTimes New Roman,Times,serif\\nTrebuchet MS,Helvetica,sans-serif\\nVerdana,Geneva,sans-serif\\nGill Sans,Geneva,sans-serif"'),
-('Config', 'Config.reservedDirs', '["file","install","Ip","Plugin","update","Theme","index.php","admin","admin.php"]'),
+('Config', 'Config.reservedDirs', '["file","install","Ip","Plugin","update","Theme", "ThemeAdmin","index.php","admin","admin.php"]'),
 ('Config', 'Content.widgetGalleryQuality', '90'),
 ('Config', 'Content.widgetImageWidth', '1160'),
 ('Config', 'Content.widgetImageHeight', '800'),
@@ -62,7 +62,7 @@ INSERT INTO `ip_storage` (`plugin`, `key`, `value`) VALUES
 ('Config', 'Pages.hideNewPages', '0'),
 ('Cron', 'lastExecutionStart', '[[[[time]]]]'),
 ('Cron', 'lastExecutionEnd', '[[[[time]]]]'),
-('Ip', 'version', '"5.0.1"'),  /* //CHANGE_ON_VERSION_UPDATE */
+('Ip', 'version', '"5.0.20"'),  /* //CHANGE_ON_VERSION_UPDATE */
 ('Ip', 'dbVersion', '99'), /* //CHANGE_ON_VERSION_UPDATE */
 ('Ip', 'theme', '"Air"'),
 ('Ip', 'cachedBaseUrl', ''),

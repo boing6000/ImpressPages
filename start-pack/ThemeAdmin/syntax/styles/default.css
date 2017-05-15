@@ -1,0 +1,99 @@
+/*
+
+Original highlight.js style (c) Ivan Sagalaev <maniac@softwaremaniacs.org>
+
+*/
+
+.ip .hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #F0F0F0;
+}
+
+
+/* Base color: saturation 0; */
+
+.ip .hljs,
+.ip .hljs-subst {
+  color: #444;
+}
+
+.ip .hljs-comment {
+  color: #888888;
+}
+
+.ip .hljs-keyword,
+.ip .hljs-attribute,
+.ip .hljs-selector-tag,
+.ip .hljs-meta-keyword,
+.ip .hljs-doctag,
+.ip .hljs-name {
+  font-weight: bold;
+}
+
+
+/* User color: hue: 0 */
+
+.ip .hljs-type,
+.ip .hljs-string,
+.ip .hljs-number,
+.ip .hljs-selector-id,
+.ip .hljs-selector-class,
+.ip .hljs-quote,
+.ip .hljs-template-tag,
+.ip .hljs-deletion {
+  color: #880000;
+}
+
+.ip .hljs-title,
+.ip .hljs-section {
+  color: #880000;
+  font-weight: bold;
+}
+
+.ip .hljs-regexp,
+.ip .hljs-symbol,
+.ip .hljs-variable,
+.ip .hljs-template-variable,
+.ip .hljs-link,
+.ip .hljs-selector-attr,
+.ip .hljs-selector-pseudo {
+  color: #BC6060;
+}
+
+
+/* Language color: hue: 90; */
+
+.ip .hljs-literal {
+  color: #78A960;
+}
+
+.ip .hljs-built_in,
+.ip .hljs-bullet,
+.ip .hljs-code,
+.ip .hljs-addition {
+  color: #397300;
+}
+
+
+/* Meta color: hue: 200 */
+
+.ip .hljs-meta {
+  color: #1f7199;
+}
+
+.ip .hljs-meta-string {
+  color: #4d99bf;
+}
+
+
+/* Misc effects */
+
+.ip .hljs-emphasis {
+  font-style: italic;
+}
+
+.ip .hljs-strong {
+  font-weight: bold;
+}
