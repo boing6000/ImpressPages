@@ -22,3 +22,11 @@
         <?php } ?>
     </div>
 <?php } ?>
+
+<?php if(ipIsManagementState()):?>
+<script>
+    setTimeout(function () {
+        $('.ipWidget-Gallery ._container').kbGallery();
+    });
+</script>
+<?php endif;?>

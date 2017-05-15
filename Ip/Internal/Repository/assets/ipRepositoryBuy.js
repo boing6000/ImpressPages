@@ -110,7 +110,6 @@
             }
 
             $('.ipsModuleRepositoryPopup .pagination a').bind('click', function(e){
-                console.log(e)
                 $.proxy(methods._getImages, $this, $(this).data('page'))();
             })
 
