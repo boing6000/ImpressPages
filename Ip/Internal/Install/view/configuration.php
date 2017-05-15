@@ -11,6 +11,10 @@
         <input type="email" class="form-control" id="ipsConfigWebsiteEmail" name="configWebsiteEmail" value="<?php echo htmlspecialchars($config['websiteEmail']); ?>">
     </div>
     <div class="form-group">
+        <label for="ipsConfigWebsiteFile"><?php _e('Website folder name in the repository', 'Install'); ?></label>
+        <input type="text" class="form-control" id="ipsConfigWebsiteFile" name="configWebsiteFile" value="<?php echo htmlspecialchars($config['websiteFile']); ?>">
+    </div>
+    <div class="form-group">
         <label for="ipsConfigTimezone"><?php _e('Time zone', 'Install'); ?></label>
         <select class="form-control" id="ipsConfigTimezone" name="configTimezone">
             <?php echo $timezoneSelectOptions; ?>

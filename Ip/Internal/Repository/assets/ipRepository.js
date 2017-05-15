@@ -45,6 +45,7 @@ var ipRepositoryESC;
         });
 
         $popup.bind('ipModuleRepository.confirm', function (e, files) {
+            console.log(e, files)
             $(this).trigger('ipRepository.filesSelected', [files]);
             $(this).trigger('ipModuleRepository.close');
         });
