@@ -83,6 +83,8 @@ class Controller extends \Ip\WidgetController
                         $currentData['images'] = array_merge($newImages, $currentData['images']);
                     }
 
+                    $currentData['gallery_id'] = !isset($currentData['gallery_id']) ? uniqid('gal_') : $currentData['gallery_id'];
+
 
                     return $currentData;
                 case 'crop':
@@ -153,6 +155,9 @@ class Controller extends \Ip\WidgetController
                     if (isset($postData['description'])) {
                         $currentData['images'][$index]['description'] = $postData['description'];
                     }
+
+                    $currentData['gallery_id'] = !isset($currentData['gallery_id']) ? uniqid('gal_') : $currentData['gallery_id'];
+
                     return $currentData;
 
                     break;
@@ -183,6 +188,9 @@ class Controller extends \Ip\WidgetController
 
         if (isset($data['images']) && is_array($data['images'])) {
             //loop all current images
+
+            $data['gallery_id'] = !isset($data['gallery_id']) ? uniqid('gal_') : $data['gallery_id'];
+
             foreach ($data['images'] as &$curImage) {
                 if (empty($curImage['imageOriginal'])) {
                     continue;
