@@ -62,60 +62,12 @@
                         }
                     });
 
-                    //create directory
-                    $popup.find('.ipsBrowserCreateDir').on('submit', function (e) {
-                        e.preventDefault();
-                        $popup.trigger('ipModuleRepository.createDir');
-                    });
-
-                    $popup.find('.ipsBrowserSearch .ipsSubmit').on('click', function (e) {
-                        $popup.trigger('ipModuleRepository.createDir');
-                    });
-
-                    $popup.find('.ipSelectFolder').on('change', function (e) {
-                        var tmpData = $this.data('ipRepositoryUploader');
-                        tmpData.path = this.value;
-                        $this.data('ipRepositoryUploader', tmpData)
-                    });
-
                     $(window).bind("resize.ipRepositoryAll", $.proxy(methods._resize, this));
                     $popup.bind('ipModuleRepository.close', $.proxy(methods._teardown, this));
                     $popup.bind('ipModuleRepository.search', $.proxy(methods._filterFilesByTerm, this));
-                    $popup.bind('ipModuleRepository.createDir', $.proxy(methods._createDirectory, this));
                     $.proxy(methods._resize, this)();
-
                 }
             });
-        },
-
-        _createDirectory: function (dir) {
-            var $this = $(this);
-            var term = $('.ipsBrowserCreateDir .ipsTerm').val();
-
-            var data = Object();
-            data.aa = 'Repository.createDir';
-            data.securityToken = ip.securityToken;
-            data.path = term;
-
-            $.ajax({
-                type: 'POST',
-                url: ip.baseUrl,
-                data: data,
-                context: this,
-                //success : $.proxy(methods._storeFilesResponse, this),
-                success: function (res) {
-                    if(res.success){
-                        var $select = $this.find('.ipSelectFolder');
-                        $select.append('<option value="' + term + '" selected>' + term + '</option>');
-                    }
-                },
-                error: function (response) {
-                    console.log(response.responseText)
-                    $this.find('.debugError').html(response.responseText);
-                }, //TODO report error
-                dataType: 'json'
-            });
-
         },
 
         _filterFilesByTerm: function (e) {
@@ -326,13 +278,12 @@
             var $template = $this.find('.ipsFileTemplate');
             var $listTemplate = $this.find('.ipsListTemplate');
             var $titleTemplate = $this.find('.ipsListTitleTemplate');
-            var $icon = '<i class="glyphicon glyphicon-tag" style="margin-right: 5px; color: #999;"></i>';
 
             for (var gi in fileGroups) {
                 var $newList = $listTemplate.clone().detach().removeClass('ipsListTemplate');
                 $newList.addClass('_previewType-' + settings.preview);
                 var $newTitle = $titleTemplate.clone().detach().removeClass('ipsListTitleTemplate');
-                $newTitle.html($icon + gi);
+                $newTitle.text(gi);
                 for (var i in fileGroups[gi]) {
                     var files = fileGroups[gi];
                     var $newItem = $template.clone().removeClass('ipsFileTemplate');
@@ -407,7 +358,7 @@
             if (confirm(ipRepositoryTranslate_confirm_delete)) {
                 var $this = $(this);
 
-                var files = [];
+                var files = new Array();
                 $this.find('li.ui-selected').each(function () {
                     var $this = $(this);
                     files.push($this.data('fileData'));
@@ -418,7 +369,7 @@
             }
         },
 
-        _executeDelete: function (files, forced) {
+        _executeDelete: function(files, forced) {
             var context = this;
             var $this = $(this);
             var data = Object();
@@ -452,22 +403,10 @@
 
                         switch (settings.preview) {
                             case 'thumbnails':
-                                animateOptions = {
-                                    width: 0,
-                                    paddingLeft: 0,
-                                    paddingRight: 0,
-                                    marginLeft: 0,
-                                    marginRight: 0
-                                };
+                                animateOptions = {width: 0, paddingLeft: 0, paddingRight: 0, marginLeft: 0, marginRight: 0};
                                 break;
                             default:
-                                animateOptions = {
-                                    height: 0,
-                                    paddingTop: 0,
-                                    paddingBottom: 0,
-                                    marginTop: 0,
-                                    marginBottom: 0
-                                };
+                                animateOptions = {height: 0, paddingTop: 0, paddingBottom: 0, marginTop: 0, marginBottom: 0};
                                 break;
                         }
 

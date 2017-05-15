@@ -69,36 +69,11 @@
                     $(window).bind("resize.ipRepositoryUploader", $.proxy(methods._resize, this));
                     $popup.bind('ipModuleRepository.close', $.proxy(methods._teardown, this));
                     $.proxy(methods._resize, this)();
-                    $.proxy(methods._getFolders, this)();
 
                 }
             });
         },
 
-        _getFolders: function(e){
-            //<option value=""></option>
-            var data = Object();
-            data.aa = 'Repository.getFolders';
-            data.securityToken = ip.securityToken;
-
-            var $this = $(this);
-            var $select = $this.find('.ipSelectFolder');
-            $select.append('<option value="" selected>Padrão</option>');
-
-            $.ajax({
-                type: 'GET',
-                url: ip.baseUrl,
-                data: data,
-                context: $this,
-                success: function(response){
-                    var folders = response.folders;
-                    for (var i =0; i < folders.length; i++){
-                        $select.append('<option value="'+folders[i]+'">'+folders[i]+'</option>');
-                    }
-                },
-                dataType: 'json'
-            });
-        },
 
         _storeFilesResponse: function (response) {
             var $this = $(this);
