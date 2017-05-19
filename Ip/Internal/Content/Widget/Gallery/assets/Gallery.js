@@ -45,25 +45,25 @@ var IpWidget_Gallery = function () {
 
 
 
-        var $list = this.$widgetObject.find('._container');
-        $list.sortable();
-        $list.disableSelection();
-        $list.on("sortstart", function (event, ui) {
-            currentScope.dragItemOriginalPosition = $(ui.item).index();
-            $.proxy(currentScope.blurImage, currentScope)();
-        });
-        $list.on("sortstop", function (event, ui) {
-            var data = {};
-            data.method = 'move';
-            data.originalPosition = currentScope.dragItemOriginalPosition;
-            data.newPosition = $(ui.item).index();
-            if (data.newPosition != data.originalPosition) {
-                currentScope.$widgetObject.save(data, true);
-            } else {
-                //display image controls
-                $(ui.item).click();
-            }
-        });
+        /*var $list = this.$widgetObject.find('._container');
+         $list.sortable();
+         $list.disableSelection();
+         $list.on("sortstart", function (event, ui) {
+         currentScope.dragItemOriginalPosition = $(ui.item).index();
+         $.proxy(currentScope.blurImage, currentScope)();
+         });
+         $list.on("sortstop", function (event, ui) {
+         var data = {};
+         data.method = 'move';
+         data.originalPosition = currentScope.dragItemOriginalPosition;
+         data.newPosition = $(ui.item).index();
+         if (data.newPosition != data.originalPosition) {
+         currentScope.$widgetObject.save(data, true);
+         } else {
+         //display image controls
+         $(ui.item).click();
+         }
+         });*/
 
         //individual image management
         this.$widgetObject.find('a').on('click', function (e) {
@@ -89,10 +89,17 @@ var IpWidget_Gallery = function () {
 
         }, this));
 
+        if('kbGallery' in $.fn){
+            $('.ipWidget-Gallery ._container').kbGallery();
+        }
+        $(window).on('kbGalleryLoaded', function () {
+
+        });
+
         $(document).on(
             'ipWidgetDeleted.galleryWidget ' +
-                'ipWidgetAdded.galleryWidget ' +
-                'ipWidgetMoved.galleryWidget'
+            'ipWidgetAdded.galleryWidget ' +
+            'ipWidgetMoved.galleryWidget'
             , $.proxy(currentScope.blur, currentScope));
 
 

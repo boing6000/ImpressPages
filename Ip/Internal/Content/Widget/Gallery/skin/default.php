@@ -12,7 +12,7 @@
                     <?php echo $image['blank'] ? ' target="_blank" ' : ''; ?>
                     <?php echo $image['nofollow'] ? ' rel="nofollow" ' : ''; ?>
                 <?php } ?>
-                    class="_link"
+                    class="_link ipsItem"
                     title="<?php echo esc($image['title']); ?>"
                     data-description="<?php echo isset($image['description']) ? escAttr($image['description']) : ''; ?>"
             >
@@ -22,11 +22,3 @@
         <?php } ?>
     </div>
 <?php } ?>
-
-<?php if(ipIsManagementState()):?>
-<script>
-    setTimeout(function () {
-        $('.ipWidget-Gallery ._container').kbGallery();
-    });
-</script>
-<?php endif;?>

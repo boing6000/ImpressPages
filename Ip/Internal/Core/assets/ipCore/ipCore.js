@@ -61,7 +61,7 @@ var ipLoadGoogleMaps = function () {
     ipGoogleMapsLoading = true;
     var script = document.createElement('script');
     script.type = 'text/javascript';
-    script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places&' +
+    script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&' +
         'callback=ipGoogleMapsLoadedCallback&key=' + ip.gmapsApiKey;
     document.body.appendChild(script);
 };
