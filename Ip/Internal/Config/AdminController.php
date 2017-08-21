@@ -26,6 +26,9 @@ class AdminController extends \Ip\Controller
             'form' => $form,
             'advancedForm' => $advancedForm
         );
+
+        //ipResponse()->setLayoutVariable('removeAdminContentWrapper', true);
+
         return ipView('view/configWindow.php', $data)->render();
 
     }

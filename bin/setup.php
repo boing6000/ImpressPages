@@ -114,12 +114,6 @@ function createMainDirs($publicDir)
         AdvancedFs::copyPathContent('vendor/boing6000/impresspages/start-pack/Theme', $pluginDir);
     }
 
-    $pluginDir = $publicDir . '/ThemeAdmin';
-    if (!is_dir($pluginDir)) {
-        AdvancedFs::createPath($pluginDir);
-        AdvancedFs::copyPathContent('vendor/boing6000/impresspages/start-pack/ThemeAdmin', $pluginDir);
-    }
-
     $pluginDir = $publicDir . '/file';
     if (!is_dir($pluginDir)) {
         AdvancedFs::createPath($pluginDir);

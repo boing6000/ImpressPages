@@ -125,16 +125,43 @@ class FormatHelper
             if (function_exists('numfmt_create') && function_exists('numfmt_format_currency')) {
                 $locale = str_replace('-', '_', $languageCode);
                 $fmt = numfmt_create($locale, \NumberFormatter::CURRENCY);
-                $formattedPrice = numfmt_format_currency($fmt, $price / 100, strtoupper($currency));
+                $formattedPrice = numfmt_format_currency($fmt, $price , strtoupper($currency));
                 if ($formattedPrice !== false && $formattedPrice != 'NaN') {
                     return $formattedPrice;
                 }
             }
 
-            $formattedPrice = round(($data['price'] / 100), 2) . ' ' . $data['currency'];
+            $formattedPrice = round(($data['price'] ), 2) . ' ' . $data['currency'];
         }
 
         return $formattedPrice;
+    }
+
+    /**
+     * @param int $value Price in cents
+     * @param string $currency Three letter currency code
+     * @param string $context
+     * @param string $languageCode
+     * @return string
+     */
+    public static function formatDecimal($value, $context, $languageCode = null)
+    {
+        if ($languageCode === null) {
+            $languageCode = ipContent()->getCurrentLanguage()->getCode();
+        }
+
+        $data = array(
+            'price' => $value,
+            'context' => $context
+        );
+
+        $locale = str_replace('-', '_', $languageCode);
+
+        $formattedNumber = new \NumberFormatter($locale, \NumberFormatter::DECIMAL_ALWAYS_SHOWN);
+
+        $value = str_replace('¤', '', $formattedNumber->format($value));
+
+        return $value;
     }
 
     /**

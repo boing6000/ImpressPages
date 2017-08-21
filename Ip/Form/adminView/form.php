@@ -6,7 +6,7 @@
     <?php foreach ($form->getFieldsets() as $fieldsetKey => $fieldset) { ?>
         <fieldset <?php echo $fieldset->getAttributesStr($this->getDoctype()) ?>>
             <?php if ($fieldset->getLabel()) { ?>
-                <legend><?php echo esc($fieldset->getLabel()); ?></legend>
+                <legend class="caption-subject font-blue-madison bold uppercase"><?php echo esc($fieldset->getLabel()); ?></legend>
             <?php } ?>
             <?php foreach ($fieldset->getFields() as $fieldKey => $field) { ?>
                 <?php

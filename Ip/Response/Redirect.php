@@ -14,7 +14,7 @@ class Redirect extends \Ip\Response
     {
         parent::__construct($content, $headers, $statusCode);
         $this->addHeader('HTTP/1.1 301 Moved Permanently');
-        $this->addHeader('Location: ' . $url);
+        $this->addHeader('Location: ' . ipMakeUrlAnchor($url));
     }
 
 }

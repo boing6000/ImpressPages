@@ -96,7 +96,6 @@ class PublicController extends \Ip\Controller
             $_SESSION['config'] = array(
                 'websiteName' => '',
                 'websiteEmail' => '',
-                'websiteFile' => '',
                 'timezone' => 'America/Sao_Paulo',
                 'support' => 0
             );
@@ -304,11 +303,6 @@ class PublicController extends \Ip\Controller
             $errors[] = __('Please enter correct website email.', 'Install', false);
         }
 
-        // Website file repository
-        if (empty(ipRequest()->getPost('configWebsiteFile'))) {
-            $errors[] = __('Please enter correct Website folder name.', 'Install', false);
-        }
-
         // Website timezone
         if (!Helper::validateTimezone(ipRequest()->getPost('configTimezone'))) {
             $errors[] = __('Please choose website time zone.', 'Install', false);
@@ -323,9 +317,6 @@ class PublicController extends \Ip\Controller
         }
         if (ipRequest()->getPost('configWebsiteEmail')) {
             $_SESSION['config']['websiteEmail'] = ipRequest()->getPost('configWebsiteEmail');
-        }
-        if (ipRequest()->getPost('configWebsiteFile')) {
-            $_SESSION['config']['websiteFile'] = ipRequest()->getPost('configWebsiteFile');
         }
         if (ipRequest()->getPost('configTimezone')) {
             $_SESSION['config']['timezone'] = ipRequest()->getPost('configTimezone');
@@ -430,14 +421,6 @@ class PublicController extends \Ip\Controller
             $configToFile['rewritesDisabled'] = true;
         }
 
-        $configToFile['loginRedirectUrl'] = '';
-        $configToFile['adminTheme'] = 'Default';
-        $configToFile['logo'] = 'file/logo.png';
-        $configToFile['logoInverse'] = 'file/logo_white.png';
-        $configToFile['loginBackground'] = 'file/bg63.png';
-        $configToFile['adminLocale'] = 'pt_BR';
-        $configToFile['repositoryFile'] = $_SESSION['config']['websiteFile'];
-
         $admin = ipRequest()->getPost('admin');
         if ($admin) {
             $adminUsername = $admin['username'];
@@ -454,8 +437,8 @@ class PublicController extends \Ip\Controller
             if ($admin) {
                 Model::insertAdmin($adminUsername, $adminEmail, $adminPassword);
             }
-            ipSetOptionLang('Config.websiteTitle', $_SESSION['config']['websiteName'], 'pt');
-            ipSetOptionLang('Config.websiteEmail', $_SESSION['config']['websiteEmail'], 'pt');
+            ipSetOptionLang('Config.websiteTitle', $_SESSION['config']['websiteName'], 'en');
+            ipSetOptionLang('Config.websiteEmail', $_SESSION['config']['websiteEmail'], 'en');
             Model::generateCronPassword();
             ipStorage()->set('Ip', 'cachedBaseUrl', $cachedBaseUrl);
             ipStorage()->set('Ip', 'websiteId', $_SESSION['websiteId']);
@@ -473,8 +456,8 @@ class PublicController extends \Ip\Controller
         }
 
         // Send usage statistics
-//        $usageStatistics = Helper::setUsageStatistics('Install.database', $_SESSION['db_errors']);
-//        \Ip\Internal\System\Model::sendUsageStatistics($usageStatistics);
+        $usageStatistics = Helper::setUsageStatistics('Install.database', $_SESSION['db_errors']);
+        \Ip\Internal\System\Model::sendUsageStatistics($usageStatistics);
 
         $redirect = $cachedBaseUrl . 'admin';
 

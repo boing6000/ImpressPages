@@ -59,7 +59,9 @@ class Currency extends \Ip\Internal\Grid\Model\Field
             'label' => $this->label,
             'name' => $this->field,
             'layout' => $this->layout,
-            'attributes' => $this->attributes
+            'attributes' => $this->attributes,
+            'column' => $this->column,
+            'ngIf' => $this->ngIf
         ));
         $field->setValue($this->defaultValue);
         return $field;
@@ -79,7 +81,9 @@ class Currency extends \Ip\Internal\Grid\Model\Field
             'label' => $this->label,
             'name' => $this->field,
             'layout' => $this->layout,
-            'attributes' => $this->attributes
+            'attributes' => $this->attributes,
+            'column' => $this->column,
+            'ngIf' => $this->ngIf
         ));
         if (!empty($curData[$this->field])) {
             $curData[$this->field] = $curData[$this->field] / 100;
@@ -102,7 +106,9 @@ class Currency extends \Ip\Internal\Grid\Model\Field
             'label' => $this->label,
             'name' => $this->field,
             'layout' => $this->layout,
-            'attributes' => $this->attributes
+            'attributes' => $this->attributes,
+            'column' => $this->column,
+            'ngIf' => $this->ngIf
         ));
         if (!empty($searchVariables[$this->field])) {
             $field->setValue($searchVariables[$this->field]);

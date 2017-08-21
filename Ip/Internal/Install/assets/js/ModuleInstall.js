@@ -59,7 +59,6 @@ var ModuleInstall = new function () {
             'pa': 'Install.testConfiguration',
             'configWebsiteName': $('#ipsConfigWebsiteName').val(),
             'configWebsiteEmail': $('#ipsConfigWebsiteEmail').val(),
-            'configWebsiteFile': $('#ipsConfigWebsiteFile').val(),
             'configTimezone': $('#ipsConfigTimezone').val(),
             'configSupport': $('#ipsConfigSupport').prop('checked') ? 1 : 0,
             'jsonrpc': '2.0'

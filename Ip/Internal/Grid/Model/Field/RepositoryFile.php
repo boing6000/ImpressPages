@@ -64,7 +64,9 @@ class RepositoryFile extends \Ip\Internal\Grid\Model\Field
             'name' => $this->field,
             'layout' => $this->layout,
             'attributes' => $this->attributes,
-            'path' => $this->path
+            'path' => $this->path,
+            'column' => $this->column,
+            'ngIf' => $this->ngIf
         ));
         if ($this->fileLimit !== null) {
             $field->setFileLimit($this->fileLimit);
@@ -94,7 +96,9 @@ class RepositoryFile extends \Ip\Internal\Grid\Model\Field
             'name' => $this->field,
             'layout' => $this->layout,
             'attributes' => $this->attributes,
-            'path' => $this->path
+            'path' => $this->path,
+            'column' => $this->column,
+            'ngIf' => $this->ngIf
         ));
         if ($this->fileLimit !== null) {
             $field->setFileLimit($this->fileLimit);
@@ -134,7 +138,9 @@ class RepositoryFile extends \Ip\Internal\Grid\Model\Field
             'label' => $this->label,
             'name' => $this->field,
             'layout' => $this->layout,
-            'attributes' => $this->attributes
+            'attributes' => $this->attributes,
+            'column' => $this->column,
+            'ngIf' => $this->ngIf
         ));
         if (!empty($searchVariables[$this->field])) {
             $field->setValue($searchVariables[$this->field]);

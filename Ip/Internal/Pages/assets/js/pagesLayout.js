@@ -15,7 +15,7 @@ var ipPagesResize;
         var $container = $('.ipsAdminPages');
         var $containerForScroll = $('.ipsAdminPagesContainer');
         var $languages = $('.ipsLanguages');
-        var $menus = $('.ipsMenus');
+        var $menus = $('.ipsMenus, .page-wrapper-top');
         var $pages = $('.ipsPagesContainer');
         var $properties = $('.ipsProperties');
 

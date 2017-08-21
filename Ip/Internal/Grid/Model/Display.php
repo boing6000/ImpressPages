@@ -101,7 +101,8 @@ class Display
             'title' => $subgridConfig->getTitle(),
             'breadcrumb' => $this->getBreadcrumb(),
             'pageSize' => $pageSize,
-            'pageSizes' => $values
+            'pageSizes' => $values,
+            'ngApp' => $subgridConfig->getNgApp()
         );
 
         $html = ipView($subgridConfig->layout(), $variables)->render();
@@ -327,6 +328,10 @@ class Display
                 }
                 $column ['actionAttributes'] = 'class="ipsAction _clickable" data-method="order" data-params="' . escAttr(json_encode(array('order' => $field['field']))) . '"';
             }
+            
+            if(isset($field['width'])){
+                $column['width'] = $field['width'];
+            }
 
             $columns[] = $column;
         }
@@ -357,6 +362,8 @@ class Display
             }
 
         }
+    
+        $tfieldsets = 0;
 
         foreach ($this->subgridConfig->fields() as $key => $fieldData) {
             if (isset($fieldData['allowUpdate']) && !$fieldData['allowUpdate']) {
@@ -364,7 +371,7 @@ class Display
             }
 
 
-            if (!empty($fieldData['type']) && $fieldData['type'] == 'Tab') {
+            if (!empty($fieldData['type']) && $fieldData['type'] == 'Tab' ) {
                 //tabs (fieldsets)
                 $title = '';
                 if (!empty($fieldData['label'])) {
@@ -385,8 +392,19 @@ class Display
                 } else {
                     $fieldset->addAttribute('class', 'tab-pane');
                 }
+                $fieldset->addAttribute('fieldset', 'tab');
 
-
+            } else if(!empty($fieldData['type']) && $fieldData['type'] == 'Fieldset'){
+                $title = '';
+                if (!empty($fieldData['label'])) {
+                    $title = $fieldData['label'];
+                }
+    
+                $fieldset = new \Ip\Form\Fieldset($title);
+                $fieldset->addAttribute('fieldset', 'fieldset');
+                $form->addFieldset($fieldset);
+    
+                $tfieldsets++;
             } else {
                 //fields
                 if (!empty($fieldData['multilingual'])) {
@@ -432,7 +450,8 @@ class Display
         if ($this->subgridConfig->updateFormFilter()) {
             $form = call_user_func($this->subgridConfig->updateFormFilter(), $form);
         }
-
+    
+        $form->addAttribute('tfieldsets', $tfieldsets);
         return $form;
     }
 
@@ -470,9 +489,7 @@ class Display
 
         $subgridConfig = $this->subgridConfig;
         $fields = $subgridConfig->fields();
-
-
-
+        $tfieldsets = 0;
 
         foreach ($fields as $key => $fieldData) {
             if (isset($fieldData['allowCreate']) && !$fieldData['allowCreate']) {
@@ -500,8 +517,20 @@ class Display
                 } else {
                     $fieldset->addAttribute('class', 'tab-pane');
                 }
+    
+                $fieldset->addAttribute('fieldset', 'tab');
 
-
+            } else if(!empty($fieldData['type']) && $fieldData['type'] == 'Fieldset'){
+                $title = '';
+                if (!empty($fieldData['label'])) {
+                    $title = $fieldData['label'];
+                }
+    
+                $fieldset = new \Ip\Form\Fieldset($title);
+                $fieldset->addAttribute('fieldset', 'fieldset');
+                $form->addFieldset($fieldset);
+    
+                $tfieldsets++;
             } else {
                 //fields
                 if (!empty($fieldData['multilingual'])) {
@@ -537,6 +566,7 @@ class Display
 
         $field = new \Ip\Form\Field\HiddenSubmit();
         $form->addField($field);
+        $form->addAttribute('tfieldsets', $tfieldsets);
 
 
         if ($this->subgridConfig->createFormFilter()) {
@@ -575,6 +605,8 @@ class Display
         $form->setMethod('get');
         $form->addAttribute('autocomplete', 'off');
         $form->removeCsrfCheck();
+        $tfieldsets = 0;
+        
         foreach ($this->subgridConfig->fields() as $key => $fieldData) {
             if (isset($fieldData['allowSearch']) && !$fieldData['allowSearch']) {
                 continue;
@@ -601,8 +633,19 @@ class Display
                 } else {
                     $fieldset->addAttribute('class', 'tab-pane');
                 }
+                $fieldset->addAttribute('fieldset', 'tab');
 
-
+            } else if(!empty($fieldData['type']) && $fieldData['type'] == 'Fieldset'){
+                $title = '';
+                if (!empty($fieldData['label'])) {
+                    $title = $fieldData['label'];
+                }
+    
+                $fieldset = new \Ip\Form\Fieldset($title);
+                $fieldset->addAttribute('fieldset', 'fieldset');
+                $form->addFieldset($fieldset);
+    
+                $tfieldsets++;
             } else {
 
                 $fieldObject = $this->subgridConfig->fieldObject($fieldData);
@@ -626,6 +669,7 @@ class Display
         if (count($form->getFieldsets()) > 1) {
             $form->addClass('tab-content');
         }
+        $form->addAttribute('tfieldsets', $tfieldsets);
 
         return $form;
     }

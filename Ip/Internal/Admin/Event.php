@@ -4,64 +4,70 @@
 namespace Ip\Internal\Admin;
 
 
+use Ip\Internal\Angular\MenuHelper;
+
 class Event
 {
-    public static function getAdminNavbarHtml()
-    {
-        $requestData = \Ip\ServiceLocator::request()->getRequest();
-        $curModTitle = '';
-        $curModUrl = '';
-        $curModIcon = '';
+    public static function getAdminNavbarHtml(){
+            $requestData = \Ip\ServiceLocator::request()->getRequest();
+            $curModTitle = '';
+            $curModUrl = '';
+            $curModIcon = '';
 
-        if (!empty($requestData['aa'])) {
-            $parts = explode('.', $requestData['aa']);
-            $curModule = $parts[0];
-        } else {
-            $curModule = "Content";
+            if (!empty($requestData['aa'])) {
+                $parts = explode('.', $requestData['aa']);
+                $curModule = $parts[0];
+            } else {
+                $curModule = "Content";
+            }
+
+            if (isset($curModule) && $curModule) {
+                $title = $curModule;
+                $pluginConfig = \Ip\Internal\Plugins\Service::getPluginConfig($curModule);
+
+                $curModTitle = __($title, 'Ip-admin', false);
+                $curModUrl = ipActionUrl(['aa' => $curModule . '.index']);
+                $curModIcon = Model::getAdminMenuItemIcon($curModule);
+
+                //try to translate and get icon in config.json
+                $curModTitle = isset($pluginConfig['title']) ? __($pluginConfig['title'], $curModule, false) : $curModTitle;
+                $curModIcon = isset($pluginConfig['icon']) ? $pluginConfig['icon'] : $curModIcon;
+            }
+
+            $navbarButtons = [
+                [
+                    'text'   => '',
+                    'hint'   => __('Logout', 'Ip-admin', false),
+                    'url'    => ipActionUrl(['sa' => 'Admin.logout']),
+                    'class'  => 'ipsAdminLogout',
+                    'faIcon' => 'fa-power-off'
+                ]
+            ];
+
+            $navbarButtons = ipFilter('ipAdminNavbarButtons', $navbarButtons);
+
+            $navbarCenterElements = ipFilter('ipAdminNavbarCenterElements', []);
+
+            $data = [
+                'menuItems'            => Model::instance()->getAdminMenuItems($curModule),
+                'curModTitle'          => $curModTitle,
+                'curModUrl'            => $curModUrl,
+                'curModIcon'           => $curModIcon,
+                'navbarButtons'        => array_reverse($navbarButtons),
+                'navbarCenterElements' => $navbarCenterElements
+            ];
+
+        if (ipRoute()->plugin() == 'Content') {
+            $html = ipView('view/navbar.php', $data)->render();
+            return $html;
+        }else{
+            ipResponse()->setLayoutVariable('menu', ipFilter('ipAngularMenu', MenuHelper::menuCore()));
         }
 
-        if (isset($curModule) && $curModule) {
-            $title = $curModule;
-            $pluginConfig = \Ip\Internal\Plugins\Service::getPluginConfig($curModule);
-            
-            $curModTitle = __($title, 'Ip-admin', false);
-            $curModUrl = ipActionUrl(array('aa' => $curModule . '.index'));
-            $curModIcon = Model::getAdminMenuItemIcon($curModule);
-            
-            //try to translate and get icon in config.json
-            $curModTitle = isset($pluginConfig['title']) ? __($pluginConfig['title'], $curModule, false) : $curModTitle;
-            $curModIcon = isset($pluginConfig['icon']) ? $pluginConfig['icon'] : $curModIcon;
-        }
-
-        $navbarButtons = array(
-            array(
-                'text' => '',
-                'hint' => __('Logout', 'Ip-admin', false),
-                'url' => ipActionUrl(array('sa' => 'Admin.logout')),
-                'class' => 'ipsAdminLogout',
-                'faIcon' => 'fa-power-off'
-            )
-        );
-
-        $navbarButtons = ipFilter('ipAdminNavbarButtons', $navbarButtons);
-
-        $navbarCenterElements = ipFilter('ipAdminNavbarCenterElements', []);
-
-        $data = array(
-            'menuItems' => Model::instance()->getAdminMenuItems($curModule),
-            'curModTitle' => $curModTitle,
-            'curModUrl' => $curModUrl,
-            'curModIcon' => $curModIcon,
-            'navbarButtons' => array_reverse($navbarButtons),
-            'navbarCenterElements' => $navbarCenterElements
-        );
-
-
-        $html = ipView('view/navbar.php', $data)->render();
-        return $html;
+        return null;
     }
 
-    public static function ipInitFinished ()
+    public static function ipInitFinished()
     {
         $request = \Ip\ServiceLocator::request();
         $safeMode = $request->getQuery('safeMode');
@@ -76,8 +82,6 @@ class Event
 
     public static function ipBeforeController()
     {
-
-
         //show admin submenu if needed
         if (ipRoute()->isAdmin()) {
             ipAddJs('Ip/Internal/Core/assets/js/jquery-ui/jquery-ui.js');
@@ -95,6 +99,7 @@ class Event
             if (!ipRequest()->getQuery('ipDesignPreview') && !ipRequest()->getQuery('disableAdminNavbar')) {
                 ipAddJs('Ip/Internal/Admin/assets/admin.js');
                 ipAddJsVariable('ipAdminNavbar', static::getAdminNavbarHtml());
+                ipResponse()->setLayoutVariable('admin', \Ip\Internal\Administrators\Model::get(ipAdminId()));
             }
         }
 
@@ -104,11 +109,11 @@ class Event
             $adminId = \Ip\Internal\Admin\Backend::userId();
             $admin = \Ip\Internal\Administrators\Model::getById($adminId);
             ipAddJs('Ip/Internal/Admin/assets/adminIsAutogenerated.js');
-            $data = array(
+            $data = [
                 'adminUsername' => $admin['username'],
                 'adminPassword' => ipStorage()->get('Ip', 'adminIsAutogenerated'),
-                'adminEmail' => $admin['email']
-            );
+                'adminEmail'    => $admin['email']
+            ];
             ipAddJsVariable('ipAdminIsAutogenerated', ipView('view/adminIsAutoGenerated.php', $data)->render());
         }
 

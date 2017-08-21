@@ -88,7 +88,7 @@ class Checkboxes extends Field
     /**
      * Set values
      *
-     * @param string $values
+     * @param array $values
      */
     public function setValues($values)
     {

@@ -30,7 +30,9 @@ class FormHelper
 
     protected static function getAvailableLocales()
     {
-        $locales = [];
+        $locales = [['en', 'English'], ['es', 'Español'], ['pt', 'Português']];
+        
+        return $locales;
         $translationDirectories = array(
             ipFile('Ip/Internal/Translations/translations'),
             ipFile('file/translations/original'),
@@ -107,6 +109,7 @@ class FormHelper
                 'value' => __('Login', 'Ip-admin', false)
             ));
         $field->addClass('ipsLoginButton');
+        $field->addClass('btn green');
         $form->addField($field);
 
         return $form;

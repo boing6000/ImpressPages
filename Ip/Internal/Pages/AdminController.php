@@ -52,7 +52,8 @@ class AdminController extends \Ip\Controller
         );
         $layout = ipView('view/layout.php', $variables);
 
-        ipResponse()->setLayoutVariable('removeAdminContentWrapper', true);
+        ipResponse()->setLayoutVariable('view', true);
+        //ipResponse()->setLayoutVariable('removeAdminContentWrapper', true);
         ipAddJsVariable('listStylePageSize', ipGetOption('Pages.pageListSize', 30));
 
         return $layout->render();

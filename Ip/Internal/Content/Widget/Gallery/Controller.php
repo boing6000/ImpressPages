@@ -3,6 +3,7 @@
  * @package ImpressPages
  *
  */
+
 namespace Ip\Internal\Content\Widget\Gallery;
 
 
@@ -36,7 +37,7 @@ class Controller extends \Ip\WidgetController
 
                     $movedImage = $currentData['images'][$originalPosition];
                     unset($currentData['images'][$originalPosition]);
-                    array_splice($currentData['images'], $newPosition, 0, array($movedImage));
+                    array_splice($currentData['images'], $newPosition, 0, [$movedImage]);
                     return $currentData;
                 case 'add':
                     if (!isset($postData['images']) || !is_array($postData['images'])) {
@@ -66,10 +67,10 @@ class Controller extends \Ip\WidgetController
                             $title = basename($image['fileName']);
                         }
 
-                        $newImage = array(
+                        $newImage = [
                             'imageOriginal' => $image['fileName'],
-                            'title' => $title,
-                        );
+                            'title'         => $title,
+                        ];
 
                         $newImages[] = $newImage;
                     }
@@ -77,13 +78,11 @@ class Controller extends \Ip\WidgetController
                         $currentData['images'] = [];
                     }
 
-                    if(ipGetOption('Content.imageGalleryPosition') == 'bottom') {
+                    if (ipGetOption('Content.imageGalleryPosition') == 'bottom') {
                         $currentData['images'] = array_merge($currentData['images'], $newImages);
                     } else {
                         $currentData['images'] = array_merge($newImages, $currentData['images']);
                     }
-
-                    $currentData['gallery_id'] = !isset($currentData['gallery_id']) ? uniqid('gal_') : $currentData['gallery_id'];
 
 
                     return $currentData;
@@ -126,7 +125,7 @@ class Controller extends \Ip\WidgetController
                         $currentData['images'][$index]['blank'] = (int)$postData['blank'];
                     }
                     if (isset($postData['nofollow'])) {
-                        $currentData['images'][$index]['nofollow'] = (int) $postData['nofollow'];
+                        $currentData['images'][$index]['nofollow'] = (int)$postData['nofollow'];
                     }
                     return $currentData;
 
@@ -155,9 +154,6 @@ class Controller extends \Ip\WidgetController
                     if (isset($postData['description'])) {
                         $currentData['images'][$index]['description'] = $postData['description'];
                     }
-
-                    $currentData['gallery_id'] = !isset($currentData['gallery_id']) ? uniqid('gal_') : $currentData['gallery_id'];
-
                     return $currentData;
 
                     break;
@@ -174,10 +170,10 @@ class Controller extends \Ip\WidgetController
 
     public function adminHtmlSnippet()
     {
-        $variables = array(
-            'linkForm' => $this->linkForm(),
+        $variables = [
+            'linkForm'     => $this->linkForm(),
             'settingsForm' => $this->settingsForm()
-        );
+        ];
         return ipView('snippet/gallery.php', $variables)->render();
 
     }
@@ -188,9 +184,6 @@ class Controller extends \Ip\WidgetController
 
         if (isset($data['images']) && is_array($data['images'])) {
             //loop all current images
-
-            $data['gallery_id'] = !isset($data['gallery_id']) ? uniqid('gal_') : $data['gallery_id'];
-
             foreach ($data['images'] as &$curImage) {
                 if (empty($curImage['imageOriginal'])) {
                     continue;
@@ -201,15 +194,23 @@ class Controller extends \Ip\WidgetController
                 $bigWidth = ipGetOption('Config.lightboxWidth', 800);
                 $bigHeight = ipGetOption('Config.lightboxHeight', 600);
 
-                $transformBig = array(
-                    'type' => 'fit',
-                    'width' => $bigWidth,
+                $transformBig = [
+                    'type'   => 'fit',
+                    'width'  => $bigWidth,
                     'height' => $bigHeight
-                );
+                ];
                 $curImage['imageBig'] = ipFileUrl(
                     ipReflection($curImage['imageOriginal'], $transformBig, $desiredName)
                 );
-
+                $curImage['sizes'] = getimagesize(
+                    $curImage['imageBig']
+                );
+                /*$curImage['imageBig'] = ipActionUrl([
+                    'pa'      => 'KbCore.index',
+                    'file'    => $curImage['imageOriginal'],
+                    'options' => $transformBig,
+                    'name'    => $desiredName
+                ]);*/
 
                 $curImage['imageSmall'] = $this->cropSmallImage($curImage);
 
@@ -248,23 +249,23 @@ class Controller extends \Ip\WidgetController
         }
         $smallImageUrl = null;
         if (isset($curImage['cropX1']) && isset($curImage['cropY1']) && isset($curImage['cropX2']) && isset($curImage['cropY2'])) {
-            $transformSmall = array(
-                'type' => 'crop',
-                'x1' => $curImage['cropX1'],
-                'y1' => $curImage['cropY1'],
-                'x2' => $curImage['cropX2'],
-                'y2' => $curImage['cropY2'],
-                'width' => ipGetOption('Content.widgetGalleryWidth'),
-                'height' => ipGetOption('Content.widgetGalleryHeight'),
+            $transformSmall = [
+                'type'    => 'crop',
+                'x1'      => $curImage['cropX1'],
+                'y1'      => $curImage['cropY1'],
+                'x2'      => $curImage['cropX2'],
+                'y2'      => $curImage['cropY2'],
+                'width'   => ipGetOption('Content.widgetGalleryWidth'),
+                'height'  => ipGetOption('Content.widgetGalleryHeight'),
                 'quality' => ipGetOption('Content.widgetGalleryQuality')
-            );
+            ];
         } else {
-            $transformSmall = array(
-                'type' => 'center',
-                'width' => ipGetOption('Content.widgetGalleryWidth'),
-                'height' => ipGetOption('Content.widgetGalleryHeight'),
+            $transformSmall = [
+                'type'    => 'center',
+                'width'   => ipGetOption('Content.widgetGalleryWidth'),
+                'height'  => ipGetOption('Content.widgetGalleryHeight'),
                 'quality' => ipGetOption('Content.widgetGalleryQuality')
-            );
+            ];
         }
         $smallImageUrl = '';
         if (!empty($curImage['imageOriginal'])) {
@@ -354,40 +355,40 @@ class Controller extends \Ip\WidgetController
         $form->setEnvironment(\Ip\Form::ENVIRONMENT_ADMIN);
 
         $field = new \Ip\Form\Field\Select(
-            array(
-                'name' => 'type',
+            [
+                'name'  => 'type',
                 'label' => __('Mouse click action', 'Ip-admin', false),
-            ));
+            ]);
 
-        $values = array(
-            array('lightbox', __('Lightbox', 'Ip-admin', false)),
-            array('link', __('URL', 'Ip-admin', false)),
-            array('none', __('None', 'Ip-admin', false)),
-        );
+        $values = [
+            ['lightbox', __('Lightbox', 'Ip-admin', false)],
+            ['link', __('URL', 'Ip-admin', false)],
+            ['none', __('None', 'Ip-admin', false)],
+        ];
         $field->setValues($values);
         $form->addfield($field);
 
 
         $field = new \Ip\Form\Field\Url(
-            array(
-                'name' => 'url',
+            [
+                'name'  => 'url',
                 'label' => __('Url', 'Ip-admin', false),
-            ));
+            ]);
         $form->addField($field);
 
 
         $field = new \Ip\Form\Field\Checkbox(
-            array(
-                'name' => 'blank',
+            [
+                'name'  => 'blank',
                 'label' => __('Open in new window', 'Ip-admin', false),
-            ));
+            ]);
         $form->addField($field);
 
         $field = new \Ip\Form\Field\Checkbox(
-            array(
-                'name' => 'nofollow',
+            [
+                'name'  => 'nofollow',
                 'label' => __('Set rel="nofollow" attribute', 'Ip-admin', false),
-            ));
+            ]);
         $form->addField($field);
 
         return $form; // Output a string with generated HTML form
@@ -401,18 +402,18 @@ class Controller extends \Ip\WidgetController
         $form->setEnvironment(\Ip\Form::ENVIRONMENT_ADMIN);
 
         $field = new \Ip\Form\Field\Text(
-            array(
-                'name' => 'title',
+            [
+                'name'  => 'title',
                 'label' => __('Title', 'Ip-admin', false),
-            ));
+            ]);
         $form->addField($field);
 
 
         $field = new \Ip\Form\Field\Textarea(
-            array(
-                'name' => 'description',
+            [
+                'name'  => 'description',
                 'label' => __('Description', 'Ip-admin', false),
-            ));
+            ]);
         $form->addField($field);
 
 
@@ -430,18 +431,18 @@ class Controller extends \Ip\WidgetController
     public function optionsMenu($revisionId, $widgetId, $data, $skin)
     {
         $answer = [];
-        $answer[] = array(
-            'title' => __('Add image', 'Ip-admin', false),
-            'attributes' => array(
+        $answer[] = [
+            'title'      => __('Add image', 'Ip-admin', false),
+            'attributes' => [
                 'class' => 'ipsAdd'
-            )
-        );
-        $answer[] = array(
-            'title' => __('Manage images', 'Ip-admin', false),
-            'attributes' => array(
+            ]
+        ];
+        $answer[] = [
+            'title'      => __('Manage images', 'Ip-admin', false),
+            'attributes' => [
                 'class' => 'ipsManage'
-            )
-        );
+            ]
+        ];
         return $answer;
     }
 

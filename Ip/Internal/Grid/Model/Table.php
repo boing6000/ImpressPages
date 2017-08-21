@@ -57,9 +57,6 @@ class Table extends \Ip\Internal\Grid\Model
             $params = empty($data['params']) ? [] : $data['params'];
         }
 
-
-
-
         if ($this->subgridConfig->preventAction()) {
             $preventReason = call_user_func($this->subgridConfig->preventAction(), $method, $params, $this->statusVariables);
             if ($preventReason) {

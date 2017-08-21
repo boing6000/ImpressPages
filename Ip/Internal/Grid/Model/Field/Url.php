@@ -15,7 +15,9 @@ class Url extends \Ip\Internal\Grid\Model\Field\Text
             'label' => $this->label,
             'name' => $this->field,
             'layout' => $this->layout,
-            'attributes' => $this->attributes
+            'attributes' => $this->attributes,
+            'column' => $this->column,
+            'ngIf' => $this->ngIf
         ));
         $field->setValue($this->defaultValue);
         return $field;
@@ -27,7 +29,9 @@ class Url extends \Ip\Internal\Grid\Model\Field\Text
             'label' => $this->label,
             'name' => $this->field,
             'layout' => $this->layout,
-            'attributes' => $this->attributes
+            'attributes' => $this->attributes,
+            'column' => $this->column,
+            'ngIf' => $this->ngIf
         ));
         if (isset($curData[$this->field])){
         $field->setValue($curData[$this->field]);

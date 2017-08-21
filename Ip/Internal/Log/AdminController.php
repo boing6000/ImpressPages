@@ -13,6 +13,9 @@ class AdminController extends \Ip\GridController
     {
         ipAddJs('assets/log.js');
         ipAddJsVariable('clearConfirmTranslation', __('Are you sure you want to delete all log records?', 'Ip-admin', false));
+
+        ipResponse()->setLayoutVariable('adminContentWrapper', true);
+
         return parent::index();
     }
     protected function config()

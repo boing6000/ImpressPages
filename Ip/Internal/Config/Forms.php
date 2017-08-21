@@ -62,7 +62,7 @@ class Forms
         $form = new \Ip\Form();
         $form->addClass('ipsConfigForm');
         $form->addClass('ipsConfigFormAdvanced');
-        $form->addClass('hidden');
+        //$form->addClass('hidden');
         $form->setAjaxSubmit(0);
 
 

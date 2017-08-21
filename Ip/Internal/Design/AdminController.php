@@ -69,7 +69,7 @@ class AdminController extends \Ip\Controller
         );
         $contentView = ipView('view/layout.php', $data);
 
-        ipResponse()->setLayoutVariable('removeAdminContentWrapper', true);
+        //ipResponse()->setLayoutVariable('removeAdminContentWrapper', true);
 
         return $contentView->render();
     }
@@ -226,10 +226,7 @@ class AdminController extends \Ip\Controller
         foreach($valuesToStore as $key => $value) {
             $configModel->setConfigValue(ipConfig()->theme(), $key, $value);
         }
-
-
-
-
+        
         $lessCompiler = LessCompiler::instance();
         $lessCompiler->rebuild(ipConfig()->theme());
         \Ip\Internal\Core\Service::invalidateAssetCache();

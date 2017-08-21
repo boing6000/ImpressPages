@@ -298,7 +298,7 @@ class AdminController extends \Ip\Controller
             'status' => 'success',
             'action' => '_savePageResponse',
             'newRevisionId' => $newRevisionId,
-            'newRevisionUrl' => $page->getLink()
+            'newRevisionUrl' => ipMakeUrlAnchor($page->getLink())
         );
 
         return new \Ip\Response\Json($data);

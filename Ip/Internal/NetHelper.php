@@ -6,8 +6,6 @@
 namespace Ip\Internal;
 
 
-use Ip\Exception;
-
 class NetHelper
 {
 
@@ -50,8 +48,6 @@ class NetHelper
         );
 
         curl_setopt_array($ch, $options);
-
-
 
         if (curl_exec($ch)) {
             return $desiredFilename;

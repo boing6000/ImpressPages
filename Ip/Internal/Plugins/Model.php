@@ -8,6 +8,7 @@ class Model
     public static function getModules()
     {
         $modules = array(
+            "Angular",
             "Core",
             "Content",
             "Admin",

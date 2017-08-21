@@ -28,7 +28,7 @@ class AdminController extends \Ip\Controller
         $data = [];
         $view = ipView('view/layout.php', $data);
 
-        ipResponse()->setLayoutVariable('removeAdminContentWrapper', true);
+        //ipResponse()->setLayoutVariable('removeAdminContentWrapper', true);
 
         return $view->render();
     }

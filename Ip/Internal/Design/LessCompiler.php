@@ -34,16 +34,24 @@ class LessCompiler
 
         $configModel = ConfigModel::instance();
         $config = $configModel->getAllConfigValues($themeName);
-
-        $less = "@import '{$lessFile}';";
+        $base_files = $this->getLessFiles('Base');
+    
+       $less = '';
+        
+        foreach ($base_files as $file){
+            $less .= "@import '{$file}';";
+        }
+        
+        $less .= "@import '{$lessFile}';";
         $less .= $this->generateLessVariables($options, $config);
 
         $css = '';
 
         try {
-            require_once ipFile('Ip/Lib/lessphp/Less.php');
+            require_once ipFile('Ip/Lib/less.php/Less.php');
             $themeDir = ipFile('Theme/' . $themeName . '/assets/');
             $ipContentDir = ipFile('Ip/Internal/Core/assets/ipContent/');
+            $baseDir = ipFile('Theme/Base/assets/');
 
             // creating new context to pass theme assets directory dynamically to a static callback function
             $context = $this;
@@ -60,12 +68,20 @@ class LessCompiler
             $parser = new \Less_Parser($parserOptions);
             $directories = array(
                 $themeDir => '',
-                $ipContentDir => ''
+                $ipContentDir => '',
+                $baseDir => ''
             );
             $parser->SetImportDirs($directories);
             $parser->parse($less);
             $css = $parser->getCss();
-            $css = "/* Edit {$lessFile}, not this file. */" . "\n" . $css;
+    
+            $boot = '';
+            if(is_file(ipFile('Theme/Base/assets/bootstrap.css'))){
+                $file = ipFile('Theme/Base/assets/bootstrap.css');
+                $boot .= file_get_contents($file);
+            }
+            
+            $css = "/* Edit {$lessFile}, not this file. */" . "\n" . $boot . $css;
         } catch (\Exception $e) {
             ipLog()->error('Less compilation error: Theme - ' . $e->getMessage());
         }

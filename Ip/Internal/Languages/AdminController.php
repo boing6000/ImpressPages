@@ -15,7 +15,8 @@ class AdminController extends \Ip\GridController
     {
         ipAddJs('Ip/Internal/Languages/assets/languages.js');
         $response = parent::index() . $this->helperHtml();
-        return $response;
+
+        return ipView('view/main.php', ['html' => $response]);
     }
 
 
@@ -38,6 +39,7 @@ class AdminController extends \Ip\GridController
         }
 
         return array(
+            'title' => '',
             'type' => 'table',
             'table' => 'language',
             'allowCreate' => false,

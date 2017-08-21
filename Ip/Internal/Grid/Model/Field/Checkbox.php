@@ -14,6 +14,7 @@ class Checkbox extends \Ip\Internal\Grid\Model\Field
 
     public function __construct($fieldConfig, $wholeConfig)
     {
+        parent::__construct($fieldConfig, $wholeConfig);
         if (empty($fieldConfig['field'])) {
             throw new \Ip\Exception('\'field\' option required for text field');
         }
@@ -43,7 +44,9 @@ class Checkbox extends \Ip\Internal\Grid\Model\Field
             'label' => $this->label,
             'name' => $this->field,
             'layout' => $this->layout,
-            'attributes' => $this->attributes
+            'attributes' => $this->attributes,
+            'column' => $this->column,
+            'ngIf' => $this->ngIf
         ));
         $field->setValue($this->defaultValue);
         return $field;
@@ -60,7 +63,9 @@ class Checkbox extends \Ip\Internal\Grid\Model\Field
             'label' => $this->label,
             'name' => $this->field,
             'layout' => $this->layout,
-            'attributes' => $this->attributes
+            'attributes' => $this->attributes,
+            'column' => $this->column,
+            'ngIf' => $this->ngIf
         ));
         if (isset($curData[$this->field])){
         $field->setValue($curData[$this->field]);
@@ -90,7 +95,9 @@ class Checkbox extends \Ip\Internal\Grid\Model\Field
             'values' => $values,
             'value' => null,
             'layout' => $this->layout,
-            'attributes' => $this->attributes
+            'attributes' => $this->attributes,
+            'column' => $this->column,
+            'ngIf' => $this->ngIf
         ));
         if (isset($searchVariables[$this->field])) {
             $field->setValue($searchVariables[$this->field]);

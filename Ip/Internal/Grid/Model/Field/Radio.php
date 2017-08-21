@@ -15,6 +15,7 @@ class Radio extends \Ip\Internal\Grid\Model\Field
 
     public function __construct($fieldFieldConfig, $wholeConfig)
     {
+        parent::__construct($fieldFieldConfig, $wholeConfig);
         if (empty($fieldFieldConfig['field'])) {
             throw new \Ip\Exception('\'field\' option required for text field');
         }
@@ -52,7 +53,9 @@ class Radio extends \Ip\Internal\Grid\Model\Field
             'name' => $this->field,
             'values' => $this->values,
             'layout' => $this->layout,
-            'attributes' => $this->attributes
+            'attributes' => $this->attributes,
+            'column' => $this->column,
+            'ngIf' => $this->ngIf
         ));
         $field->setValue($this->defaultValue);
         return $field;
@@ -73,7 +76,9 @@ class Radio extends \Ip\Internal\Grid\Model\Field
             'name' => $this->field,
             'values' => $this->values,
             'layout' => $this->layout,
-            'attributes' => $this->attributes
+            'attributes' => $this->attributes,
+            'column' => $this->column,
+            'ngIf' => $this->ngIf
         ));
         if (isset($curData[$this->field])){
         $field->setValue($curData[$this->field]);
@@ -97,7 +102,9 @@ class Radio extends \Ip\Internal\Grid\Model\Field
             'name' => $this->field,
             'values' => $values,
             'layout' => $this->layout,
-            'attributes' => $this->attributes
+            'attributes' => $this->attributes,
+            'column' => $this->column,
+            'ngIf' => $this->ngIf
         ));
         if (!empty($searchVariables[$this->field])) {
             $field->setValue($searchVariables[$this->field]);

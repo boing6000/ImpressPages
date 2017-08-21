@@ -106,21 +106,37 @@ class View
     public function render()
     {
 
+        $latte = new \Latte\Engine;
+        $latte->setLoader(new \Latte\Loaders\FileLoader);
 
-        extract($this->data);
+        $file_parts = pathinfo($this->file);
 
-        ob_start();
+        if($file_parts['extension'] == 'php'){
+            extract($this->data);
 
-        $file = $this->file;
-        if (!empty(self::$overrides[$file])) {
-            $file = self::$overrides[$file];
+            ob_start();
+
+            $file = $this->file;
+            if (!empty(self::$overrides[$file])) {
+                $file = self::$overrides[$file];
+            }
+            require($file); // file existence has been checked in ipView function
+
+            $output = ob_get_contents();
+            ob_end_clean();
+
+            return $output;
+        }else{
+            $latte->addFilter('ipfileurl', function($file){
+                return ipFileUrl($file);
+            });
+
+            $output = $latte->renderToString($this->file, $this->data);
+            return $output;
         }
-        require($file); // file existence has been checked in ipView function
 
-        $output = ob_get_contents();
-        ob_end_clean();
 
-        return $output;
+
 
     }
 

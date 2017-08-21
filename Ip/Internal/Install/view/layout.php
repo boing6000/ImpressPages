@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="page-header">
-                    <img style="height: 80px; margin-left: -10px;" src="<?php echo ipFileUrl('file/logo.png'); ?>" alt="KosbitAdmin">
+                    <img src="<?php echo ipFileUrl('Ip/Internal/Install/assets/impresspages_logo.png'); ?>" alt="ImpressPages">
                     <?php
                         $languages = \Ip\Internal\Install\Helper::getInstallationLanguages();
                         $currentLanguage = isset($_SESSION['installationLanguage']) ? $_SESSION['installationLanguage'] : \Ip\Internal\Install\Helper::$defaultLanguageCode;
@@ -51,7 +51,7 @@
         </div>
     </div>
 </div>
-<!--<iframe style="width:0;height:0;border:none;" border="0" src="http://www.impresspages.org/installationscript2/?step=--><?php //echo !empty($_GET['step']) && $_GET['step'] >=\Ip\Internal\Install\Helper::$firstStep ? (int)$_GET['step'] : \Ip\Internal\Install\Helper::$firstStep; ?><!--"></iframe>-->
+<iframe style="width:0;height:0;border:none;" border="0" src="http://www.impresspages.org/installationscript2/?step=<?php echo !empty($_GET['step']) && $_GET['step'] >=\Ip\Internal\Install\Helper::$firstStep ? (int)$_GET['step'] : \Ip\Internal\Install\Helper::$firstStep; ?>"></iframe>
 
 <script type="text/javascript" src="<?php echo ipFileUrl('Ip/Internal/Install/assets/js/jquery.js') ?>"></script>
 <script type="text/javascript" src="<?php echo ipFileUrl('Ip/Internal/Install/assets/js/bootstrap.js') ?>"></script>

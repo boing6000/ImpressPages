@@ -19,11 +19,11 @@ class AdminController extends \Ip\Controller
                     array('aa' => 'Administrators.index')
                 ) . "#/hash=&administrator=" . \Ip\Internal\Admin\Backend::userId();
 
-            \Ip\Internal\System\Model::sendUsageStatistics(array('action' => 'Install.adminChange'));
+          //  \Ip\Internal\System\Model::sendUsageStatistics(array('action' => 'Install.adminChange'));
             return \Ip\Response\JsonRpc::result(array('redirect' => $redirect));
         }
 
-        \Ip\Internal\System\Model::sendUsageStatistics(array('action' => 'Install.adminKeep'));
+      //  \Ip\Internal\System\Model::sendUsageStatistics(array('action' => 'Install.adminKeep'));
         return \Ip\Response\JsonRpc::result(array('close' => 1));
     }
 }

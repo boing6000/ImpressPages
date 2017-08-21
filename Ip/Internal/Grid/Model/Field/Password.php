@@ -16,7 +16,9 @@ class Password extends \Ip\Internal\Grid\Model\Field
             'label' => $this->label,
             'name' => $this->field,
             'layout' => $this->layout,
-            'attributes' => $this->attributes
+            'attributes' => $this->attributes,
+            'column' => $this->column,
+            'ngIf' => $this->ngIf
         ));
         $field->setValue($this->defaultValue);
         return $field;
@@ -37,7 +39,9 @@ class Password extends \Ip\Internal\Grid\Model\Field
             'name' => $this->field,
             'layout' => $this->layout,
             'attributes' => $this->attributes,
-            'value' => ''
+            'value' => '',
+            'column' => $this->column,
+            'ngIf' => $this->ngIf
         ));
         return $field;
     }

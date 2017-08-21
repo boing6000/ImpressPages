@@ -38,6 +38,8 @@ abstract class Field
     protected $classes; // CSS classes to be added to input field.
     protected $environment;
     protected $layout;
+    private $column = 12;
+    protected $ngIf = '';
 
     /**
      * Constructor
@@ -75,6 +77,9 @@ abstract class Field
         if (!empty($options['layout'])) {
             $this->setLayout($options['layout']);
         }
+        if (!empty($options['column'])) {
+            $this->setColumn($options['column']);
+        }
 
         $this->classes = array();
         if (!empty($options['css'])) { //alias of 'class'
@@ -93,6 +98,38 @@ abstract class Field
             $this->addAttribute('id', 'field_' . rand(1, PHP_INT_MAX));
         }
 
+        if (!empty($options['ngIf'])) { //alias of 'class'
+            $this->ngIf = $options['ngIf'];
+        }
+
+        switch ($this->getName()){
+            case 'antispam':
+            case 'antispam[]':
+            case 'method':
+            case null:
+            case '':
+                break;
+            default:
+                $this->addAttribute('ng-input', null);
+                break;
+        }
+    }
+    public function getNgIf(){
+        return $this->ngIf;
+    }
+    
+    /**
+     * @param $size number between 1 to 12
+     */
+    public function setColumn($size){
+        $this->column = $size;
+    }
+    
+    /**
+     * @return string column class col-md-[1-12]
+     */
+    public function getColumn(){
+        return "col-md-{$this->column}";
     }
 
     /**
@@ -479,6 +516,13 @@ abstract class Field
     public function setAttributes($attributes)
     {
         $this->attributes = $attributes;
+
+        if($this->getAttribute('ng-model')){
+            $this->addClass('has-angular');
+
+            $ngModel = $this->getAttribute('ng-model') . $this->getName();
+            $this->addAttribute('ng-model', $ngModel);
+        }
     }
 
     /**

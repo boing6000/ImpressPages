@@ -76,6 +76,9 @@ class AdminController extends \Ip\GridController
         ipAddCss('assets/email.css');
 
         $previewModal = ipView('view/previewModal.php');
+
+        ipResponse()->setLayoutVariable('adminContentWrapper', true);
+
         return parent::index() . $previewModal;
     }
 

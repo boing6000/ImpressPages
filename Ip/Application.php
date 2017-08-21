@@ -29,7 +29,7 @@ class Application
      */
     public static function getVersion()
     {
-        return '5.0.20'; //CHANGE_ON_VERSION_UPDATE
+        return '5.0.1'; //CHANGE_ON_VERSION_UPDATE
     }
 
 
@@ -398,7 +398,7 @@ class Application
         \Ip\ServiceLocator::setConfig($config);
 
         require_once __DIR__ . '/Functions.php';
-        require_once __DIR__ .'/CustomFunctions.php';
+        require_once 'CustomFunctions.php';
 
         $this->prepareEnvironment($options);
         $request = new \Ip\Request();

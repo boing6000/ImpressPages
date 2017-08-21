@@ -1,4 +1,5 @@
-<div class="form-group type-<?php echo $field->getTypeClass(); ?><?php if ($field->getName() != null) {
+<div <?php if(!empty($field->getNgIf())) { echo "ng-if=\"{$field->getNgIf()}\"";}?> class="form-group <?php echo $field->getColumn()?> type-<?php echo $field->getTypeClass(); ?>
+<?php if ($field->getName() != null) {
     echo " name-" . $field->getName();
 } ?><?php if ($field->isRequired()) {
     echo " required";

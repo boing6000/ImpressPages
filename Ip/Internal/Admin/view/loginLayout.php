@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>ImpressPages</title>
     <link rel="stylesheet" href="<?php echo ipFileUrl('Ip/Internal/Core/assets/admin/admin.css'); ?>">
-    <link rel="stylesheet" href="<?php echo ipFileUrl('Ip/Internal/Admin/assets/login.css'); ?>">
+    <link rel="stylesheet" href="<?php echo ipFileUrl('Ip/Internal/Angular/assets/app/main.css'); ?>">
     <link rel="shortcut icon" href="<?php echo ipFileUrl('favicon.ico'); ?>">
 </head>
 <body>
@@ -12,7 +12,7 @@
 
 <a href="http://www.impresspages.org/" class="logo" target="_blank"><img src="<?php echo ipFileUrl('Ip/Internal/Admin/assets/img/logo.png'); ?>"></a>
 <div class="ip languageSelect">
-    <?php echo $languageSelectForm->render(); ?>
+   // <?php echo $languageSelectForm->render(); ?>
 </div>
 <div class="verticalAlign"></div>
 <div class="login">

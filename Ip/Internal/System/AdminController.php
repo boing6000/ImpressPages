@@ -67,6 +67,8 @@ class AdminController extends \Ip\Controller
         ipAddJs('Ip/Internal/System/assets/migrations.js');
         ipAddJs('assets/cache.js');
 
+        //ipResponse()->setLayoutVariable('adminContentWrapper', true);
+
         return $content;
     }
 

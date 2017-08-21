@@ -39,7 +39,7 @@
     </div>
 
     <div class="_themes">
-        <div class="_market <?php echo $marketUrl == '' ? 'hidden' : '' ?>">
+        <div class="_market <?php echo $marketUrl == '' ? 'hidden' : 'hidden' ?>">
             <div class="_wrapper">
                 <span class="_title"><?php _e('Marketplace', 'Ip-admin'); ?></span>
                 <span class="_notice"><?php _e('Want a new look? Search for a new theme.', 'Ip-admin'); ?></span>

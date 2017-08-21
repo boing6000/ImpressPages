@@ -1,8 +1,8 @@
 {
-    "ImpressPages installation wizard": "Instalador KosbitAdmin",
-    "Version %s": "Versão %s",
-    "This software is brought to you by <a target=\"_blank\" href=\"%s\">ImpressPages team<\/a>": "<span></span>",
-    "Apache or Nginx required": "Apache ou Nginx requerido",
+    "ImpressPages installation wizard": "ImpressPages installation wizard",
+    "Version %s": "Version %s",
+    "This software is brought to you by <a target=\"_blank\" href=\"%s\">ImpressPages team<\/a>": "This software is brought to you by <a target=\"_blank\" href=\"%s\">ImpressPages team<\/a>",
+    "Apache or Nginx required": "Apache or Nginx required",
     "Nginx configuration required": "Nginx configuration required",
     "PHP version >= 5.5": "PHP version >= 5.5",
     "PHP module \"PDO\"": "PHP module \"PDO\"",

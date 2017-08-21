@@ -9,6 +9,7 @@ namespace Ip\Internal\Grid\Model\Field;
 class Grid extends \Ip\Internal\Grid\Model\Field
 {
     protected $config = [];
+    protected $desc;
 
     /**
      * Create field object for grid
@@ -27,6 +28,12 @@ class Grid extends \Ip\Internal\Grid\Model\Field
 
         if (empty($fieldConfig['config'])) {
             throw new \Ip\Exception('Grid field needs \'config\' setting to be set.');
+        }
+
+        if (!empty($fieldConfig['desc'])) {
+            $this->desc = $fieldConfig['desc'];
+        }else{
+            $this->desc = $this->label;
         }
 
         $this->config = $fieldConfig['config'];
@@ -73,6 +80,6 @@ class Grid extends \Ip\Internal\Grid\Model\Field
      */
     public function preview($recordData)
     {
-        return '<a class="ipsAction" data-method="subgrid" data-params="' . escAttr(json_encode(array('gridParentId' => $recordData[$this->parentField], 'gridId' => $this->gridId))) . '" href="#">' . esc ($this->label) . '</a>';
+        return '<a class="ipsAction" data-method="subgrid" data-params="' . escAttr(json_encode(array('gridParentId' => $recordData[$this->parentField], 'gridId' => $this->gridId))) . '" href="#">' . esc ($this->desc) . '</a>';
     }
 }

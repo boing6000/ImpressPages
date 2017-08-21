@@ -9,7 +9,7 @@ namespace Ip\Internal\Install;
 class Helper
 {
 
-    public static $defaultLanguageCode = 'pt';
+    public static $defaultLanguageCode = 'en';
     public static $firstStep = 1;
     public static $lastStep = 4;
 

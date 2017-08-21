@@ -4,6 +4,7 @@
  *
  *
  */
+
 namespace Ip;
 
 use Ip\Internal\Content\Model;
@@ -129,7 +130,7 @@ class WidgetController
      */
     public function defaultData()
     {
-        return array();
+        return [];
     }
 
     /**
@@ -141,7 +142,7 @@ class WidgetController
     public function getSkins()
     {
 
-        $views = array();
+        $views = [];
 
 
         //collect default view files
@@ -156,6 +157,8 @@ class WidgetController
         foreach ($availableViewFiles as $viewFile) {
             if (is_file($skinDir . $viewFile) && substr($viewFile, -4) == '.php') {
                 $views[substr($viewFile, 0, -4)] = 1;
+            } else if (is_file($skinDir . $viewFile) && substr($viewFile, -6) == '.latte') {
+                $views[substr($viewFile, 0, -6)] = 1;
             }
         }
         //collect overridden theme view files
@@ -173,18 +176,20 @@ class WidgetController
             foreach ($availableViewFiles as $viewFile) {
                 if (is_file($themeViewsFolder . '/' . $viewFile) && substr($viewFile, -4) == '.php') {
                     $views[substr($viewFile, 0, -4)] = 1;
+                } else if (is_file($skinDir . $viewFile) && substr($viewFile, -6) == '.latte') {
+                    $views[substr($viewFile, 0, -6)] = 1;
                 }
             }
         }
 
-        $skins = array();
+        $skins = [];
         foreach ($views as $viewKey => $view) {
             if ($this->isCore()) {
                 $translation = __(ucfirst($viewKey), 'Ip-admin', false);
             } else {
                 $translation = __(ucfirst($viewKey), $this->pluginName, false);
             }
-            $skins[] = array('name' => $viewKey, 'title' => $translation);
+            $skins[] = ['name' => $viewKey, 'title' => $translation];
         }
 
         if (empty($skins)) {
@@ -271,7 +276,7 @@ class WidgetController
     {
         $snippetDir = ipFile($this->getWidgetDir() . \Ip\Internal\Content\Model::SNIPPET_DIR) . '/';
         if (!is_dir($snippetDir)) {
-            return array();
+            return [];
         }
         $snippetFiles = scandir($snippetDir);
         $snippet = '';
@@ -319,6 +324,7 @@ class WidgetController
 
             $answer = ipView($skinFile, $data)->render();
 
+
         } catch (\Ip\Exception $e) {
             if (ipIsManagementState()) {
                 $answer = $e->getMessage() . "\n " . $e->getTraceAsString();
@@ -355,7 +361,7 @@ class WidgetController
      */
     public function optionsMenu($revisionId, $widgetId, $data, $skin)
     {
-        return array();
+        return [];
 
 //        example with one menu item
 //        $answer = array();

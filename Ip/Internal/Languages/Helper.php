@@ -17,7 +17,10 @@ class Helper
         $field = new \Ip\Form\Field\Hidden(
             array(
                 'name' => 'aa',
-                'value' => 'Languages.addLanguage'
+                'value' => 'Languages.addLanguage',
+                'attributes' => [
+                    'style' => 'width: 100%;'
+                ]
             ));
         $form->addField($field);
 

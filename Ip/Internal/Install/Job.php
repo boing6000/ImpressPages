@@ -41,7 +41,7 @@ class Job
             return null;
         }
 
-        $code = 'pt';
+        $code = 'en';
         if (!empty($_SESSION['installationLanguage'])) {
             $code = $_SESSION['installationLanguage'];
         }

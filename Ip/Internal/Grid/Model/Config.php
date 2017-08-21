@@ -43,6 +43,10 @@ class Config
             $this->config['fields'] = $this->getTableFields($this->tableName(), $this->languageTableName());
         }
 
+        if (empty($this->config['ngApp'])) {
+            $this->config['ngApp'] = '';
+        }
+
         $this->checkConfig($this->config);
 
     }
@@ -623,6 +627,7 @@ class Config
                 }
             }
             if (!$found) {
+                var_dump($field);
                 throw new \Ip\Exception('Unknown subgrid');
             }
         }
@@ -669,6 +674,10 @@ class Config
 
         $this->multilingual = $multilingual;
         return $multilingual;
+    }
+
+    public function getNgApp(){
+        return $this->config['ngApp'];
     }
 
 }

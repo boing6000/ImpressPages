@@ -32,7 +32,9 @@ class Info extends \Ip\Internal\Grid\Model\Field
             'name' => $this->field,
             'html' => $this->html,
             'layout' => $this->layout,
-            'attributes' => $this->attributes
+            'attributes' => $this->attributes,
+            'column' => $this->column,
+            'ngIf' => $this->ngIf
         ));
         return $field;
     }
@@ -44,7 +46,9 @@ class Info extends \Ip\Internal\Grid\Model\Field
             'name' => $this->field,
             'html' => $this->html,
             'layout' => $this->layout,
-            'attributes' => $this->attributes
+            'attributes' => $this->attributes,
+            'column' => $this->column,
+            'ngIf' => $this->ngIf
         ));
         return $field;
     }
@@ -74,7 +78,9 @@ class Info extends \Ip\Internal\Grid\Model\Field
             'name' => $this->field,
             'html' => $this->html,
             'layout' => $this->layout,
-            'attributes' => $this->attributes
+            'attributes' => $this->attributes,
+            'column' => $this->column,
+            'ngIf' => $this->ngIf
         ));
         return $field;
     }

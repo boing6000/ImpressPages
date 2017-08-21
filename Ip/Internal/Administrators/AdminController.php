@@ -43,8 +43,10 @@ class AdminController extends \Ip\Controller
             'createForm' => Helper::createForm(),
             'updateForm' => Helper::updateForm()
         );
-        return ipView('view/layout.php', $data)->render();
 
+        ipResponse()->setLayoutVariable('adminContentWrapper', true);
+
+        return ipView('view/layout.php', $data)->render();
     }
 
     public function add()

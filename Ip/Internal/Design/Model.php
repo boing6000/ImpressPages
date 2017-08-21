@@ -120,7 +120,7 @@ class Model
         $answer = [];
         if ($handle = opendir($folder)) {
             while (false !== ($file = readdir($handle))) {
-                if (is_dir($folder . $file) && $file != '..' && $file != '.' && substr(
+                if (is_dir($folder . $file) && $file != '..' && $file != '.' && $file != 'Base' && substr(
                         $file,
                         0,
                         1

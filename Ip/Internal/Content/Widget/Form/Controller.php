@@ -49,7 +49,6 @@ class Controller extends \Ip\WidgetController{
 
     public function adminHtmlSnippet()
     {
-
         $fieldObjects = Model::getAvailableFieldTypes();
 
         $fieldTypes = array ();

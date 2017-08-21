@@ -10,41 +10,51 @@ abstract class Field
 {
     protected $field = '';
     protected $label = '';
+    protected $ngIf = '';
     protected $defaultValue = '';
     protected $previewMethod = '';
+    protected $column = 12;
     protected $attributes = [];
     protected $layout = \Ip\Form\Field::LAYOUT_DEFAULT;
 
     /**
      * Create field object for grid
-     * @param array $fieldFieldConfig config of this particular field
+     * @param array $fieldConfig config of this particular field
      * @param $wholeConfig whole grid setup config
      * @throws \Ip\Exception
      */
-    public function __construct($fieldFieldConfig, $wholeConfig)
+    public function __construct( $fieldConfig, $wholeConfig)
     {
-        if (!empty($fieldFieldConfig['field'])) {
-            $this->field = $fieldFieldConfig['field'];
+        if (!empty( $fieldConfig[ 'field'])) {
+            $this->field = $fieldConfig[ 'field'];
         }
 
-        if (!empty($fieldFieldConfig['label'])) {
-            $this->label = $fieldFieldConfig['label'];
+        if (!empty( $fieldConfig[ 'label'])) {
+            $this->label = $fieldConfig[ 'label'];
         }
 
-        if (!empty($fieldFieldConfig['layout'])) {
-            $this->layout = $fieldFieldConfig['layout'];
+        if (!empty( $fieldConfig[ 'layout'])) {
+            $this->layout = $fieldConfig[ 'layout'];
         }
 
-        if (!empty($fieldFieldConfig['defaultValue'])) {
-            $this->defaultValue = $fieldFieldConfig['defaultValue'];
+        if (!empty( $fieldConfig[ 'defaultValue'])) {
+            $this->defaultValue = $fieldConfig[ 'defaultValue'];
+        }
+    
+        if (!empty( $fieldConfig[ 'column'])) {
+            $this->column = $fieldConfig[ 'column'];
         }
 
-        if (!empty($fieldFieldConfig['attributes'])) {
-            $this->attributes = $fieldFieldConfig['attributes'];
+        if (!empty( $fieldConfig[ 'attributes'])) {
+            $this->attributes = $fieldConfig[ 'attributes'];
         }
 
-        if (!empty($fieldFieldConfig['previewMethod'])) {
-            $this->previewMethod = $fieldFieldConfig['previewMethod'];
+        if (!empty( $fieldConfig[ 'previewMethod'])) {
+            $this->previewMethod = $fieldConfig[ 'previewMethod'];
+        }
+
+        if (!empty( $fieldConfig[ 'ngIf'])) {
+            $this->ngIf = $fieldConfig[ 'ngIf'];
         }
 
     }
@@ -60,10 +70,26 @@ abstract class Field
         if ($this->previewMethod) {
             return call_user_func($this->previewMethod, $recordData);
         } else {
-            if (isset($recordData[$this->field])) {
-                return esc($recordData[$this->field]);
+            $value = $recordData[$this->field];
+            if(isset($value)){
+                return "<span class=\"font-dark\">{$value}</span>";
             }
+            return '';
         }
+    }
+    
+    /**
+     * @param $size number between 1 to 12
+     */
+    public function setColumn($size){
+        $this->column = $size;
+    }
+    
+    /**
+     * @return string column
+     */
+    public function getColumn(){
+        return $this->column;
     }
 
     /**
